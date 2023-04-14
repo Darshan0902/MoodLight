@@ -1,39 +1,52 @@
 # File  : Date.py
-# Contains the class Date, that are used to
-# Save information about date and operate the information
+# Berisi kelas entitas Date, yang bertanggung jawab untuk
+# Menyimpan informasi tanggal
 
 class Date:
     # CONSTRUCTOR
-    # Default constructor 
+    # Konstruktor default
     def __init__(self):
         self.day = 0
         self.month = 0
         self.year = 0
     
-    # Take a string of date and turn it into appropriate attributes
+    # Mengubah string berisi tanggal menjadi atribut yang sesuai
     # Format : DD-MM-YYYY
     def __init__(self, dateString):
         self.day = int(dateString[0:2])
         self.month = int(dateString[3:5])
         self.year = int(dateString[6:])
 
+    # GETTER
+    # Mengembalikan atribut day
+    def getDay(self):
+        return self.day
+    
+    # Mengembalikan atribut month
+    def getMonth(self):
+        return self.month
+    
+    # Mengembalikan atribut year
+    def getYear(self):
+        return self.year
+    
     # COMPARATOR
-    # Return true if this date is after the other date, otherwise return false
+    # Mengembalikan true jika tanggal ini datang setelah other, false jika tidak
     def __gt__(self, other):
         return ((self.year > other.year) or 
                 (self.year == other.year and self.month > other.month) or 
                 (self.year == other.year and self.month == other.month and self.day > other.day))
     
-    # Return true if this date is the same as other date, otherwise return false
+    # Mengembalikan true jika tanggal ini sama dengan other, false jika tidak
     def __eq__(self, other):
         return (self.year == other.year and self.month == other.month and self.day == other.day)
     
-    # Return true if this date is before the other date, otherwise return false
+    # Mengembalikan true jika tanggal ini datang sebelum other, false jika tidak
     def __lt__(self, other):
         return (not self > other and not self == other)
     
     # STRING TRANSFORM
-    # Return the string representation of date object in format DD-MM-YYYY
+    # Mengubah objek menjadi string berisi tanggal
     def toString(self):
         result = ""
 
