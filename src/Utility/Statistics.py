@@ -10,7 +10,7 @@ class Statistics:
     # CONSTRUCTOR
     # Konstruktor default
     # Masukan tipe : Mood / Sleep
-    def __init__ (self, data, tipe, idxMulai, idxAkhir):
+    def __init__ (self, data, tipe):
         self.data = data
         self.tipe = tipe
     
