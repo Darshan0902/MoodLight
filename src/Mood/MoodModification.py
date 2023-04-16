@@ -1,12 +1,17 @@
+import sys
+sys.path.append("..")
+
+from Utility.Date import Date
+
 class MoodModification :
-    def __init__(self, tanggal, rate, relaxLevel, energyLevel) :
-        self.tanggal = tanggal
+    def __init__(self, dateString, rate, relaxLevel, energyLevel) :
+        self.date = Date(dateString)
         self.rate = rate
         self.relaxLevel = relaxLevel
         self.energyLevel = energyLevel
 
-    def getTanggal(self) :
-        return self.tanggal
+    def getDate(self) :
+        return self.date
     
     def getRate(self) :
         return self.rate
