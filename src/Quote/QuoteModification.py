@@ -1,36 +1,30 @@
-# Deklarasi Kelas QuoteModification
+# File  : QuoteModification.py
+# Berisi kelas entitas SleepTrackerModification, yang bertanggung jawab untuk
+# Menyimpan informasi tidur di suatu tanggal tertentu
 
 class QuoteModification :
-    # Konstruktor
+    
+    # CONSTRUCTOR
+    # Menginisialisasi objek QuoteModification
     def __init__ (self, id, author, content):
         self.id = id
         self.author = author
         self.content = content
     
-    # Getter atribut ID
+    # GETTER
+    # Mengembalikan atribut ID dari Quote terkait
     def getID (self):
         return self.id
 
-    # Getter atribut author
+    # Mengembalikan atribut author dari Quote terkait
     def getAuthor (self):
         return self.author
     
-    # Getter atribut content
+    # Mengembalikan atribut content dari Quote terkait
     def getContent (self):
         return self.content
     
-    # Setter atribut ID
-    def setID (self, id):
-        self.id = id
-
-    # Setter atribut author
-    def setAuthor (self, author):
-        self.author = author
-    
-    # Setter atribut content
-    def setContent (self, content):
-        self.content = content
-    
+    # SETTER
     # Melakukan modifikasi terhadap data, nilai default = null
     def modifyData(self, id = None, author = None, content = None) :
         # Melakukan perubahan data mood hasil validasi dan pengecekan oleh controller.
