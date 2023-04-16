@@ -5,6 +5,7 @@
 import csv
 import sys
 sys.path.append("..")
+sys.path.append("src")
 
 from Utility.Date import Date
 from MoodModification import MoodModification
@@ -14,7 +15,7 @@ class MoodModificationController:
     # CONSTRUCTOR
     # Menginisialisasi objek dengan membaca file csv yang sesuai dan menyimpan senarai objek entitas
     def __init__(self):
-        self.fileName = "../../data/Mood.csv"
+        self.fileName = "././data/Mood.csv"
         self.header = ""
         self.data = []
 
@@ -58,24 +59,24 @@ class MoodModificationController:
                 return i
             
     # CRUD OPERATION
-    # Menyimpan informasi tidur pada suatu tanggal yang baru, jika tanggal sudah ada
+    # Menyimpan informasi mood pada suatu tanggal yang baru, jika tanggal sudah ada
     def createRecord(self, dateString, rate, relaxLevel, energyLevel):
         index = self.findNewIndexFor(dateString)
         self.data.insert(index, MoodModification(dateString, rate, relaxLevel, energyLevel))
         self.writeRecords()
 
-    # Membaca record informasi tidur pada suatu tanggal tertentu
+    # Membaca record informasi mood pada suatu tanggal tertentu
     def readRecord(self, dateString):
         index = self.findIndexOf(dateString)
         return self.data[index].getDate(), self.data[index].getRate(), self.data[index].getRelaxLevel(), self.data[index].getEnergyLevel()
     
-    # Mengubah record informasi tidur pada suatu tanggal tertentu
+    # Mengubah record informasi mood pada suatu tanggal tertentu
     def updateRecord(self, dateString, rate, relaxLevel, energyLevel):
         index = self.findIndexOf(dateString)
         self.data[index].modifyData(rate, relaxLevel, energyLevel)
         self.writeRecords()
 
-    # Menghapus record informasi tidur pada suatu tanggal tertentu
+    # Menghapus record informasi mood pada suatu tanggal tertentu
     def deleteRecord(self, dateString):
         index = self.findIndexOf(dateString)
         self.data.pop(index)
@@ -90,9 +91,3 @@ class MoodModificationController:
             for record in self.data:
                 writer.writerow([record.getDate().toString(), record.getRate(), record.getRelaxLevel(), record.getEnergyLevel()])
             moodFile.close()
-
-mc = MoodModificationController()
-mc.createRecord("16-04-2023", 5,6,7)
-mc.createRecord("17-04-2023", 5,5,5)
-mc.createRecord("10-03-2023", 4,4,4)
-mc.deleteRecord("16-04-2023")
