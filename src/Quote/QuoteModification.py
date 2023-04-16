@@ -25,6 +25,10 @@ class QuoteModification :
         return self.content
     
     # SETTER
+    # Megubah nilai atribut ID terkait
+    def setID (self, id):
+        self.id = id
+    
     # Melakukan modifikasi terhadap data, nilai default = null
     def modifyData(self, id = None, author = None, content = None) :
         # Melakukan perubahan data mood hasil validasi dan pengecekan oleh controller.
