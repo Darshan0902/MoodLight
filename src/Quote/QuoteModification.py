@@ -1,6 +1,6 @@
 # File  : QuoteModification.py
-# Berisi kelas entitas SleepTrackerModification, yang bertanggung jawab untuk
-# Menyimpan informasi tidur di suatu tanggal tertentu
+# Berisi kelas entitas QuoteModification, yang bertanggung jawab untuk
+# Menyimpan informasi quote di suatu ID tertentu
 
 class QuoteModification :
     

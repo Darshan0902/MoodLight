@@ -1,6 +1,6 @@
 # File  : QuoteModificationController.py
-# Berisi kelas entitas SleepTrackerModification, yang bertanggung jawab untuk
-# Menyimpan informasi tidur di suatu tanggal tertentu
+# Berisi kelas controller QuoteModificationController, yang bertanggung jawab untuk
+# Menyimpan seluruh data informasi quote di suatu ID tertentu
 
 # Impor modul eksternal
 import csv
@@ -17,6 +17,9 @@ class QuoteModificationController :
         
         # Melakukan pembacaan terhadap file
         with open(self.filename, "r") as file :
+            reader = csv.reader(file, quotechar = '"', delimiter = ',', quoting=csv.QUOTE_ALL, skipinitialspace = True)
+            self.header = next(reader)
+        with open(self.filename, "r") as file :
             reader = csv.reader(file)
             self.header = next(reader)
             
@@ -27,14 +30,14 @@ class QuoteModificationController :
             file.close()
 
     # PREDICATE
-    # Mengembalikan indeks dimana suatu record dengan tanggal tertentu diletakkan
+    # Mengembalikan indeks dimana suatu record dengan ID tertentu diletakkan
     def isInRecord (self, id):
         for mod in self.data :
             if (id == int(mod.getID())) :
                 return True
         return False
     
-    # Mengembalikan indeks dimana suatu record dengan tanggal tertentu diletakkan
+    # Mengembalikan indeks dimana suatu record dengan ID tertentu diletakkan
     def findIndexOf(self, id):
         for i in range(len(self.data)):
             if (id == int(self.data[i].getID())):
@@ -51,7 +54,7 @@ class QuoteModificationController :
         
     # Membuat data Quote yang baru
     def createRecord (self, id, author, content) :
-        # Melakuakn perbaharuan terhadap data ID
+        # Melakukan perbaharuan terhadap data ID
         if self.isInRecord(id):
             return self.updateRecord(id, author, content) 
         
