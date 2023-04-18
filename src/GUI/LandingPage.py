@@ -99,29 +99,25 @@ class LandingPage(customtkinter.CTk):
                 self.mood_frame = MoodModificationPage(self).get_frame()
             self.mood_frame.grid(row=0, column=1, sticky="nsew")
         else:
-            if self.mood_frame == None:
-                return
-            self.mood_frame.grid_forget()
+            if self.mood_frame != None:
+                self.mood_frame.grid_forget()
         if name == "sleep":
             self.sleep_frame.grid(row=0, column=1, sticky="nsew")
         else:
-            if self.sleep_frame == None:
-                return
-            self.sleep_frame.grid_forget()
+            if self.sleep_frame != None:
+                self.sleep_frame.grid_forget()
         if name == "diary":
             if self.diary_frame == None:
                 self.diary_frame = DiaryModificationPage(self).get_frame()
             self.diary_frame.grid(row=0, column=1, sticky="nsew")
         else:
-            if self.diary_frame == None:
-                return
-            self.diary_frame.grid_forget()
+            if self.diary_frame != None:
+                self.diary_frame.grid_forget()
         if name == "quotes":
             self.quotes_frame.grid(row=0, column=1, sticky="nsew")
         else:
-            if self.quotes_frame == None:
-                return
-            self.quotes_frame.grid_forget()
+            if self.quotes_frame != None:
+                self.quotes_frame.grid_forget()
 
     def home_button_event(self):
         self.select_frame("home")
