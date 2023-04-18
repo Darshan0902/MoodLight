@@ -3,6 +3,7 @@
 # Menyimpan seluruh data informasi quote di suatu ID tertentu
 
 # Impor modul eksternal
+import os
 import csv
 from Quote.QuoteModification import QuoteModification
 
@@ -11,7 +12,7 @@ class QuoteModificationController :
     # CONSTRUCTOR
     # Menginisialisasi objek dengan membaca file csv yang sesuai dan menyimpan senarai objek entitas
     def __init__ (self) :
-        self.filename = "../../data/Quote.csv"
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "data/Quote.csv")
         self.header = ""
         self.data = []
         
