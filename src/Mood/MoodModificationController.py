@@ -3,19 +3,16 @@
 # mengatur keberadaan dan penyimpanan dari record mood yang berupa objek entitas MoodModification 
 
 import csv
-import sys
-sys.path.append("..")
-sys.path.append("src")
-
+import os
 from Utility.Date import Date
-from MoodModification import MoodModification
+from Mood.MoodModification import MoodModification
 
 class MoodModificationController:
 
     # CONSTRUCTOR
     # Menginisialisasi objek dengan membaca file csv yang sesuai dan menyimpan senarai objek entitas
     def __init__(self):
-        self.fileName = "././data/Mood.csv"
+        self.fileName = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "data/Mood.csv")
         self.header = ""
         self.data = []
 

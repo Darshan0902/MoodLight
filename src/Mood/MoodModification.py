@@ -2,10 +2,6 @@
 # Berisi kelas entitas MoodModification, yang bertanggung jawab untuk
 # Menyimpan informasi mood di suatu tanggal tertentu
 
-import sys
-sys.path.append("..")
-sys.path.append("src")
-
 from Utility.Date import Date
 
 class MoodModification :
