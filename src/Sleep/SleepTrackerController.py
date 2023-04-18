@@ -2,19 +2,17 @@
 # Berisi kelas controller SleepTrackerController, yang bertanggung jawab untuk
 # Mengatur keberadaan dan penyimpanan dari record sleep yang berupa objek entitas SleepTrackerModification 
 
+import os
 import csv
-import sys
-sys.path.append("..")
-
 from Utility.Date import Date
-from SleepTrackerModification import SleepTrackerModification
+from Sleep.SleepTrackerModification import SleepTrackerModification
 
 class SleepTrackerController:
 
     # CONSTRUCTOR
     # Menginisialisasi objek dengan membaca file csv yang sesuai dan menyimpan senarai objek entitas
     def __init__(self):
-        self.fileName = "../../data/sleep.csv"
+        self.fileName = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "data/Sleep.csv")
         self.header = ""
         self.data = []
 
