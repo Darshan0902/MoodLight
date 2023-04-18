@@ -4,7 +4,7 @@
 
 # Impor modul eksternal
 import csv
-import QuoteModification
+from Quote.QuoteModification import QuoteModification
 
 class QuoteModificationController :
      
