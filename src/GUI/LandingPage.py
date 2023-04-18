@@ -16,7 +16,7 @@ class LandingPage(customtkinter.CTk):
         self.grid_columnconfigure(1, weight=1)
 
         # Load Images
-        image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "images")
+        image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "images")
         self.logo_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "logo.png")), size=(150,30))
         self.large_logo_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "logo.png")), size=(450,90))
         self.home_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "home.png")), size=(26,26))
