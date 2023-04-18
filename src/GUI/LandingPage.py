@@ -3,6 +3,8 @@ import os
 import tkinter as tk
 from PIL import Image
 from MoodModificationPage import MoodModificationPage
+from DiaryModificationPage import DiaryModificationPage
+
 
 class LandingPage(customtkinter.CTk):
     def __init__(self):
@@ -75,15 +77,6 @@ class LandingPage(customtkinter.CTk):
         self.diary_frame = None
         self.quotes_frame = None
 
-        # create sleep frame
-        # self.sleep_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent")
-
-        # # create diary frame
-        # self.diary_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent")
-
-        # # create quotes frame
-        # self.quotes_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent")
-
         # Set default values
         customtkinter.set_appearance_mode("Light")
         self.select_frame("home")
@@ -112,19 +105,23 @@ class LandingPage(customtkinter.CTk):
         if name == "sleep":
             self.sleep_frame.grid(row=0, column=1, sticky="nsew")
         else:
+            if self.sleep_frame == None:
+                return
             self.sleep_frame.grid_forget()
         if name == "diary":
+            if self.diary_frame == None:
+                self.diary_frame = DiaryModificationPage(self).get_frame()
             self.diary_frame.grid(row=0, column=1, sticky="nsew")
         else:
+            if self.diary_frame == None:
+                return
             self.diary_frame.grid_forget()
         if name == "quotes":
             self.quotes_frame.grid(row=0, column=1, sticky="nsew")
         else:
+            if self.quotes_frame == None:
+                return
             self.quotes_frame.grid_forget()
-    
-    def show_mood(self):
-        if self.mood_frame == None:
-            self.mood_frame = MoodModificationPage(self).get_frame()
 
     def home_button_event(self):
         self.select_frame("home")
