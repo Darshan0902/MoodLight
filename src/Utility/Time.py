@@ -14,7 +14,7 @@ class Time:
     # TRANSFORMER
     # Mengembalikan jumlah menit dari waktu 00.00 hingga waktu sekarang
     def toMinutes(self):
-        return self.hour*60 + self.minute
+        return self.hour * 60 + self.minute
     
     # Mengembalikan suatu string dari atribut objek time
     # Format : H jam M menit
