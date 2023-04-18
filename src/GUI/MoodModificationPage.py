@@ -2,7 +2,7 @@ import customtkinter
 import os
 import tkinter as tk
 from PIL import Image
-from tkcalendar import Calendar, DateEntry
+from tkcalendar import Calendar
 
 class MoodModificationPage(customtkinter.CTk):
     def __init__(self, master):

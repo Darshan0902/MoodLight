@@ -1,10 +1,10 @@
-import customtkinter
 import os
-import tkinter as tk
+import customtkinter
 from PIL import Image
-from MoodModificationPage import MoodModificationPage
-from DiaryModificationPage import DiaryModificationPage
-
+from GUI.MoodModificationPage import MoodModificationPage
+from GUI.SleepTrackerPage import SleepTrackerPage
+from GUI.DiaryModificationPage import DiaryModificationPage
+from GUI.QuotesModificationPage import QuotesModificationPage
 
 class LandingPage(customtkinter.CTk):
     def __init__(self):
@@ -94,6 +94,7 @@ class LandingPage(customtkinter.CTk):
             self.home_frame.grid(row=0, column=1, sticky="nsew")
         else:
             self.home_frame.grid_forget()
+
         if name == "mood":
             if self.mood_frame == None:
                 self.mood_frame = MoodModificationPage(self).get_frame()
@@ -101,11 +102,15 @@ class LandingPage(customtkinter.CTk):
         else:
             if self.mood_frame != None:
                 self.mood_frame.grid_forget()
+
         if name == "sleep":
+            if self.sleep_frame == None:
+                self.sleep_frame = SleepTrackerPage(self).get_frame()
             self.sleep_frame.grid(row=0, column=1, sticky="nsew")
         else:
             if self.sleep_frame != None:
                 self.sleep_frame.grid_forget()
+
         if name == "diary":
             if self.diary_frame == None:
                 self.diary_frame = DiaryModificationPage(self).get_frame()
@@ -113,7 +118,10 @@ class LandingPage(customtkinter.CTk):
         else:
             if self.diary_frame != None:
                 self.diary_frame.grid_forget()
+
         if name == "quotes":
+            if self.quotes_frame == None:
+                self.quotes_frame = QuotesModificationPage(self).get_frame()
             self.quotes_frame.grid(row=0, column=1, sticky="nsew")
         else:
             if self.quotes_frame != None:
@@ -133,10 +141,3 @@ class LandingPage(customtkinter.CTk):
 
     def quotes_button_event(self):
         self.select_frame("quotes")
-
-    def button_event(self):
-        print("ABC")
-
-if __name__ == "__main__":
-    app = LandingPage()
-    app.mainloop()

@@ -1,7 +1,7 @@
 import customtkinter
 import os
 from PIL import Image
-from QuoteModificationController import QuoteModificationController
+from Quotes.QuoteModificationController import QuoteModificationController
 
 class QuotesModificationPage(customtkinter.CTk):
     def __init__(self, master):
