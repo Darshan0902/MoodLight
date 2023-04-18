@@ -4,7 +4,7 @@
 
 import matplotlib.pyplot as plt
 import pandas as pd
-from src.Utility.Time import Time
+from Utility.Time import Time
 
 class Statistics:
     
@@ -30,6 +30,7 @@ class Statistics:
         # Inisiasi grafik
         fig, ax = plt.subplots(figsize=(12, 6))
         
+        # Pemrosesan berbasis tipe
         if (self.tipe == "Mood"):
             # Membuat grafik
             ax.plot(self.df.index, self.df.rate, label='Rate')
@@ -80,6 +81,7 @@ class Statistics:
     # MEMBERIKAN INSIGHTS
     # Memberikan nilai hasil pengelolaan data kepada pengguna
     def showInsights (self):
+        # Pemrosesan berdasarkan tipe
         if (self.tipe == "Mood"):
             # Inisiasi proses perhitungan
             count3 = 0
