@@ -6,6 +6,8 @@ from GUI.SleepTrackerPage import SleepTrackerPage
 from GUI.DiaryModificationPage import DiaryModificationPage
 from GUI.QuotesModificationPage import QuotesModificationPage
 
+customtkinter.set_widget_scaling(0.85)
+
 class LandingPage(customtkinter.CTk):
     def __init__(self):
         super().__init__()
