@@ -4,7 +4,7 @@
 import customtkinter
 import os
 from PIL import Image
-# from Quotes.QuoteModificationController import QuoteModificationController
+from Quote.QuoteModificationController import QuoteModificationController
 
 class QuotesModificationPage(customtkinter.CTk):
 
@@ -34,11 +34,14 @@ class QuotesModificationPage(customtkinter.CTk):
             self.quotes_textboxes[i].insert("0.0", self.quotes_controller.data[i].getContent() + " ~ " + self.quotes_controller.data[i].getAuthor())
             self.quotes_textboxes[i].grid(row=i,column=0,padx=10,pady=10)
         
+        self.format_label = customtkinter.CTkLabel(self.quotes_modif_frame,text="Quote format : <Quote> ~ <Author>")
+        self.format_label.grid(row=2,column=0,padx=100,pady=5)
+
         self.quotes_add = customtkinter.CTkButton(self.quotes_modif_frame, text="Add Quotes", command=self.quotes_add_button_event)
-        self.quotes_add.grid(row=2, column=0, padx=100, pady=10)
+        self.quotes_add.grid(row=3, column=0, padx=100, pady=5)
         
         self.quotes_save = customtkinter.CTkButton(self.quotes_modif_frame, text="Save", command=self.quotes_save_button_event)
-        self.quotes_save.grid(row=3, column=0, padx=100, pady=10)
+        self.quotes_save.grid(row=4, column=0, padx=100, pady=5)
 
     # GETTER
     # Mengembalikan frame pertama dan utama dari QuotesModificationPage
