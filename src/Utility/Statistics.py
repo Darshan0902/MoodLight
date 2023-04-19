@@ -5,6 +5,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 from Utility.Time import Time
+import os
 
 class Statistics:
     
@@ -76,7 +77,7 @@ class Statistics:
         plt.subplots_adjust(bottom = 0.25, top = 0.9) # Memastikan nilai tanggal tidak terpotong
         plt.ylabel('Values')
         plt.xlabel('Dates')
-        plt.savefig('../img/result.png')
+        plt.savefig(os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "img", "result.png"))
     
     # MEMBERIKAN INSIGHTS
     # Memberikan nilai hasil pengelolaan data kepada pengguna
