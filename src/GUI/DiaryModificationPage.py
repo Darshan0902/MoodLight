@@ -30,11 +30,11 @@ class DiaryModificationPage(customtkinter.CTk):
         self.current_date = self.date
 
         self.diary_date_label = customtkinter.CTkLabel(self.diary_modif_frame, text="Date : " + self.current_date, font=customtkinter.CTkFont(size=30, weight="bold"))
-        self.diary_date_label.grid(row=0, column=0, padx=10, pady=10, columnspan=2)
+        self.diary_date_label.grid(row=1, column=0, padx=10, pady=10, columnspan=2)
         
         self.diary_textbox = customtkinter.CTkTextbox(self.diary_modif_frame, width=750, height=500, border_width=2)
         self.diary_textbox.insert("0.0", "CTkTextbox\n\n" + "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n\n" * 20)
-        self.diary_textbox.grid(row=1, column=0, padx=10, pady=10, columnspan=2)
+        self.diary_textbox.grid(row=2, column=0, padx=10, pady=10, columnspan=2)
 
         self.diary_entry = customtkinter.CTkButton(self.diary_modif_frame, text= "Previous Entry", command=self.diary_open_calendar)
         self.diary_entry.grid(row=8, column=0, padx=(400,0), pady=10)
@@ -50,11 +50,11 @@ class DiaryModificationPage(customtkinter.CTk):
     # EVENT ACTION
     # Membuka kalendar untuk melihat data pada hari itu
     def diary_open_calendar(self):
-        self.calendar = Calendar(self, selectmode='day', date_pattern='dd-mm-yyyy')
+        self.calendar = Calendar(self.diary_modif_frame, selectmode='day', date_pattern='dd-mm-yyyy')
         self.calendar.grid(row=9, column=0, padx=10)
-        self.open_button = tk.Button(self, text="Open Date", command=self.diary_open_data)
+        self.open_button = tk.Button(self.diary_modif_frame, text="Open Date", command=self.diary_open_data)
         self.open_button.grid(row=10, column=0, padx=10, pady=10)
-        self.error_label = customtkinter.CTkLabel(self, text="", text_color="red")
+        self.error_label = customtkinter.CTkLabel(self.diary_modif_frame, text="", text_color="red")
         self.error_label.grid(row=11, column=0, padx=1, pady=10)
 
     # Megubah data pada hari itu
