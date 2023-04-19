@@ -96,10 +96,13 @@ class Statistics:
                         count4 += 1
                         
             # Pemorsesan nilai
-            if (count3 >= 2 and count4 >= 2):
-                return "Mood kamu 7 hari terkahir sangat bagus! Pertahankan"
+            if (len(self.data) >= 7):
+                if (count3 >= 2 and count4 >= 2):
+                    return "Mood kamu 7 hari terkahir sangat bagus! Pertahankan"
+                else :
+                    return "Mood kamu 7 hari terakhir kurang begitu baik :( Semangat yaa!"
             else :
-                return "Mood kamu 7 hari terakhir kurang begitu baik :( Semangat yaa!"
+                return "Tidak terdapat data Mood yang cukup untuk dianalisis (kurang dari 7 hari)"
         
         elif (self.tipe == "Sleep"):
             # Membuat senarai waktu
@@ -118,7 +121,10 @@ class Statistics:
                     count += 1
                         
             # Pemorsesan nilai
-            if (count >= 4):
-                return "Waktu tidurmu sangat cukup 7 hari terakhir. Pertahankan ya!"
+            if (len(self.data) >= 7):
+                if (count >= 4):
+                    return "Waktu tidurmu sangat cukup 7 hari terakhir. Pertahankan ya!"
+                else :
+                    return "Waktu tidurmu 7 hari terakhir sangat kurang :( Istirahat yaa!"
             else :
-                return "Waktu tidurmu 7 hari terakhir sangat kurang :( Istirahat yaa!"
+                return "Tidak terdapat data waktu tidur yang cukup untuk dianalisis (kurang dari 7 hari)"
