@@ -1,3 +1,7 @@
+# File : LandingPage.py 
+# Berisi kelas boundary LandingPage, yang bertanggung jawab untuk
+# Mengatur hubungan antara kelas DiaryModificationPage, MoodModificationPage, QuotesModificationPage, SleepTrackerPage dengan pengguna luar 
+
 import os
 import customtkinter
 from PIL import Image
@@ -9,17 +13,21 @@ from GUI.QuotesModificationPage import QuotesModificationPage
 customtkinter.set_widget_scaling(0.85)
 
 class LandingPage(customtkinter.CTk):
+
+    # CONSTRUCTOR
+    # Menginisialisasi seluruh frame dan fungsionalitas dari LandingPage
     def __init__(self):
         super().__init__()
 
+        # Menginisiasi pembuatan window
         self.title("MoodLight")
-        self.geometry("700x450")
+        self.geometry("1344x648")
 
-        # Set Grid Layout 1x2
+        # Membuat Konfigurasi Grid Layout 1x2
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(1, weight=1)
 
-        # Load Images
+        # Membuat konfigurasi gambar
         image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "images")
         self.logo_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "logo.png")), size=(150,30))
         self.large_logo_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "logo.png")), size=(450,90))
@@ -29,7 +37,7 @@ class LandingPage(customtkinter.CTk):
         self.diary_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "diary.png")), size=(26,26))
         self.quotes_image = customtkinter.CTkImage(Image.open(os.path.join(image_path, "quotes.png")), size=(26,26))
 
-        # Create Navigation Frame
+        # Membuat frame navigasi 
         self.navigation_frame = customtkinter.CTkFrame(self, corner_radius=0)
         self.navigation_frame.grid(row=0, column=0, sticky="nsew")
         self.navigation_frame.grid_rowconfigure(6, weight=1)
@@ -62,7 +70,7 @@ class LandingPage(customtkinter.CTk):
                                                       image=self.quotes_image, anchor="w", command=self.quotes_button_event)
         self.quotes_button.grid(row=5, column=0, sticky="ew", pady=10)
 
-        # Create Home Frame
+        # Membuat home frame
         self.home_frame = customtkinter.CTkFrame(self, corner_radius=0, fg_color="transparent")
         self.home_frame.grid_columnconfigure(6, weight=1)
 
@@ -73,25 +81,27 @@ class LandingPage(customtkinter.CTk):
         self.home_textbox.insert("0.0", "CTkTextbox\n\n" + "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n\n" * 1)
         self.home_textbox.grid(row=1, column=0, padx=100, pady=50)
 
-        # create mood frame
+        # Membuat mood frame
         self.mood_frame = None
         self.sleep_frame = None
         self.diary_frame = None
         self.quotes_frame = None
 
-        # Set default values
+        # Menetapkan default value
         customtkinter.set_appearance_mode("Light")
         self.select_frame("home")
-        
+
+    # EVENT ACTION
+    # Memilih frame mana yang akan ditampilkan ketika button pada navigation frame di tekan 
     def select_frame(self, name):
-        # set button color for selected button
+        # Menetapkan warna button ketika di tekan
         self.home_button.configure(fg_color=("gray75", "gray25") if name == "home" else "transparent")
         self.mood_button.configure(fg_color=("gray75", "gray25") if name == "mood" else "transparent")
         self.sleep_button.configure(fg_color=("gray75", "gray25") if name == "sleep" else "transparent")
         self.diary_button.configure(fg_color=("gray75", "gray25") if name == "diary" else "transparent")
         self.quotes_button.configure(fg_color=("gray75", "gray25") if name == "quotes" else "transparent")
 
-        # show selected frame
+        # Menampilkan frame yang dipilih
         if name == "home":
             self.home_frame.grid(row=0, column=1, sticky="nsew")
         else:
@@ -129,17 +139,22 @@ class LandingPage(customtkinter.CTk):
             if self.quotes_frame != None:
                 self.quotes_frame.grid_forget()
 
+    # Memilih frame home
     def home_button_event(self):
         self.select_frame("home")
 
+    # Memilih frame mood
     def mood_button_event(self):
         self.select_frame("mood")
 
+    # Memilih frame sleep
     def sleep_button_event(self):
         self.select_frame("sleep")
 
+    # Memilih frame diary
     def diary_button_event(self):
         self.select_frame("diary")
 
+    # Memilih frame quotes
     def quotes_button_event(self):
         self.select_frame("quotes")
