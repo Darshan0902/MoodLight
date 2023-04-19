@@ -36,7 +36,7 @@ class SleepTrackerModification:
     
     # SETTER
     # Mengubah informasi tidur pada tanggal ini
-    def modifyDate(self, startTime, finishTime, rating):
+    def modifyData(self, startTime, finishTime, rating):
         self.startTime = startTime
         self.finishTime = finishTime
         self.rating = rating
