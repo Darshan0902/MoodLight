@@ -76,7 +76,7 @@ class Statistics:
         plt.subplots_adjust(bottom = 0.25, top = 0.9) # Memastikan nilai tanggal tidak terpotong
         plt.ylabel('Values')
         plt.xlabel('Dates')
-        plt.savefig('../images/result.png')
+        plt.savefig('../img/result.png')
     
     # MEMBERIKAN INSIGHTS
     # Memberikan nilai hasil pengelolaan data kepada pengguna
