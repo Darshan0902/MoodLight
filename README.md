@@ -1,92 +1,181 @@
-# IF2250-2023-K02-02-MoodLight
+# MoodLight
+> *Source Code* ini dibuat untuk memenuhi Tugas Besar Rekayasa Perangkat Lunak yaitu mengimplementasikan
+> sebuah aplikasi berbasis GUI sesuai dengan spesifikasi yang diminta
 
+## Daftar Isi
+- [Author](#author)
+- [Deskripsi Singkat](#deskripsi-singkat)
+- [Sistematika File](#sistematika-file)
+- [Requirements](#requirements)
+- [Cara Menjalankan Program](#cara-menjalankan-program)
+- [Tangkapan Layar Program](#tangkapan-layar-program)
+- [Tabel Basis Data](#tabel-basis-data)
+- [Daftar Perubahan](#daftar-perubahan)
+- [Project Status](#project-status)
 
+## Author
+| NIM      | Nama                      |
+| -------- | --------------------------|
+| 13521062 | Go Dillon Audris          |
+| 13521084 | Austin Gabriel Pardosi    |
+| 13521108 | Michael Leon Putra Widhi  |
+| 13521168 | Satria Octavianus Nababan |
+| 13521172 | Nathan Tenka              |
 
-## Getting started
+## Deskripsi Singkat
+Aplikasi *MoodLight*, yaitu aplikasi untuk melacak *mood* harian pengguna. Aplikasi ini hanya memiliki satu pengguna, sehingga tidak memerlukan fitur *register* dan *login*. Pengguna aplikasi ini dapat mencatat dan mengirim data nilai *mood* atau perasaan pengguna setiap harinya. Selain itu juga, pengguna dapat mencatat jurnal harian dan riwayat tidur. Pengguna dapat melihat riwayat tersebut yang sudah tercatat di hari sebelumnya, beserta jurnal harian, dan riwayat tidurnya (jika ada) dalam bentuk tabel, atau statistik atau grafik sederhana sebagai bonus.
+Ketika membuka aplikasi, pengguna akan menerima kata-kata mutiara (*quotes*) secara *random*. Pengguna juga dapat menambahkan sendiri *quotes* yang diinginkan. *Quotes-quotes* yang ditambahkan sendiri oleh pengguna bisa diubah atau dihapus oleh pengguna. Aplikasi ini berbasis *desktop* sehingga lebih mudah untuk diakses secara personal.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
+## Sistematika File
+```bash
+.
+├─── data
+│   ├─── Diary.csv
+│   ├─── Mood.csv
+│   ├─── Quote.csv  
+│   └─── Sleep.csv
+├─── doc
+├─── img
+├─── src
+│   ├─── Diary
+│   │   ├─── DiaryModification.py
+│   │   └─── DiaryModificationController.py
+│   ├─── GUI
+│   │   ├─── DiaryModificationPage.py
+│   │   ├─── LandingPage.py
+│   │   ├─── MoodModificationPage.py
+│   │   ├─── QuotesModificationPage.py
+│   │   └─── SleepTrackerPage.py
+│   ├─── Mood
+│   │   ├─── MoodModification.py
+│   │   └─── MoodModificationController.py
+│   ├─── Quote
+│   │   ├─── QuoteModification.py
+│   │   └─── QuoteModificationController.py
+│   ├─── Sleep
+│   │   ├─── SleepTrackerController.py
+│   │   └─── SleepTrackerModification.py
+│   ├─── Utility
+│   │   ├─── Date.py
+│   │   ├─── Statistics.py
+│   │   └─── Time.py
+|   └─── App.py
+├─── .gitignore
+└─── README.md
 ```
-cd existing_repo
-git remote add origin https://gitlab.informatika.org/mikeleo03/IF2250-2023-K02-02-MoodLight.git
-git branch -M main
-git push -uf origin main
-```
 
-## Integrate with your tools
+## Requirements
+- matplotlib
+- csv
+- customtkinter
+- tkinter
+- pillow
+- tkcalendar
 
-- [ ] [Set up project integrations](https://gitlab.informatika.org/mikeleo03/IF2250-2023-K02-02-MoodLight/-/settings/integrations)
+## Cara Menjalankan Program
+Program yang diimplementasikan merupakan sebuah *desktop application* berbasis GUI Tkinter milik bahasa pemrograman python. Berikut adalah prosedur menjalankannya.
+1. Lakukan *clone repository* melalui terminal dengan *command* berikut
+   ``` bash
+    $ git clone https://gitlab.informatika.org/mikeleo03/IF2250-2023-K02-02-MoodLight.git
+   ```
+2. Lakukan pemindahan direktori ke `src` dengan *command* berikut
+   ``` bash
+    $ cd src
+   ```
+3. Unduh beberapa modul yang diperlukan dengan menjalankan *command* berikut
+   ``` bash
+    $ pip install [nama]
+   ```
+   dengan mengganti [nama] untuk setiap [*requirement*](#requirements) yang ada.
+4. Selanjutnya jalankan program dengan menjalankan *command* berikut
+   ``` bash
+    $ python3 App.py
+   ```
+   Pastikan Python 3 versi terbaru sudah terpasang pada mesin eksekusi (Anda dapat mengecek versi Python 3 dengan menjalankan *command* ```python --version``` pada *command prompt*).
+5. Jika proses berhasil, maka akan muncul sebuah tampilan aplikasi berbasis *desktop*. Selamat mengoperasikan aplikasi yang telah dibangun
 
-## Collaborate with your team
+## Tangkapan Layar Program
+1. Tampilan program utama
+![landingPage](doc/landingPage.jpg)
+*Gambar 1.* Tampilan program utama <br>
+Modul terkait : GUI, Quote <br>
+Implementer : 13521062, 13521084, 13521108
+2. Tampilan fitur *Mood*
+![moodmodif1](doc/moodModificationPage-1.jpg)
+*Gambar 2.1.* Tampilan utama fitur *Mood* <br>
+Modul terkait : GUI, Mood, Utility <br>
+Implementer : 13521062, 13521084, 13521172
+![moodmodif1](doc/moodModificationPage-2.jpg)
+*Gambar 2.2.* Tampilan hasil statistik fitur *Mood* <br>
+Modul terkait : GUI, Mood, Utility <br>
+Implementer : 13521084, 13521108, 13521172
+3. Cara mengoperasikan fitur *Diary*
+![diarymodif](doc/diaryModificationPage.jpg)
+*Gambar 3.* Tampilan utama fitur *Diary* <br>
+Modul terkait : GUI, Diary <br>
+Implementer : 13521168, 13521172
+4. Cara mengoperasikan fitur *Sleep Tracker*
+![moodmodif1](doc/sleepTrackerPage-1.jpg)
+*Gambar 4.1.* Tampilan utama fitur *Sleep Tracker* <br>
+Modul terkait : GUI, Sleep, Utility <br>
+Implementer : 13521062
+![moodmodif1](doc/sleepTrackerPage-2.jpg)
+*Gambar 4.2.* Tampilan hasil statistik fitur *Sleep Tracker* <br>
+Modul terkait : GUI, Sleep, Utility <br>
+Implementer : 13521062, 13521108
+5. Cara mengoperasikan fitur *Quote*
+![quotemodif](doc/quoteModificationPage.jpg)
+*Gambar 5.* Tampilan utama fitur modifikasi *Quote* <br>
+Modul terkait : GUI, Quote <br>
+Implementer : 13521084, 13521108, 13521172
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+## Tabel Basis Data
+### Tabel Data *Diary* (Diary.csv)
+| Atribut    | Tipe Data     | Keterangan |
+| ---------- | --------------| -----------|
+| tanggal    | date          | not null   |
+| isiJournal | varchar(256)  |            |
 
-## Test and Deploy
+### Tabel Data *Mood* (Mood.csv)
+| Atribut       | Tipe Data     | Keterangan   |
+| ------------- | --------------| -------------|
+| tanggal       | date          | not null     |
+| rate          | integer       | bernilai 1-5 |
+| relax_level   | integer       | bernilai 1-5 |
+| energy_level  | integer       | bernilai 1-5 |
 
-Use the built-in continuous integration in GitLab.
+### Tabel Data *Quote* (Quote.csv)
+| Atribut  | Tipe Data     | Keterangan   |
+| -------- | --------------| -------------|
+| id       | integer       | not null     |
+| author   | varchar(256)  |              |
+| content  | varchar(256)  |              |
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+### Tabel Data *Sleep Tracker* (Sleep.csv)
+| Atribut    | Tipe Data  | Keterangan    |
+| ---------- | -----------| ------------- |
+| tanggal    | date       | not null      |
+| jamMulai   | time       | format 24 jam |
+| jamSelesai | time       | format 24 jam |
+| rating     | integer    | bernilai 1-5  |
 
-***
+## Daftar Perubahan
+Berikut adalah daftar perubahan yang dirasa diperlukan setelah proses implementasi.
+- [ ] Menambahkan kelas *Time* yang berfungsi untuk melakukan perhitungan durasi untuk ditampilkan pada statistik waktu tidur
+- [ ] Menambahkan beberapa metode pada kelas-kelas *controller* yang berfungsi untuk memudahkan komunikasi objek lain dengan *controller*
+- [ ] Tidak mengimplementasikan kelas InputDeterminer karena tidak diperlukan dalam implementasi aplikasi
+- [ ] Menambahkan atribut-atribut tambahan serta metode tambahan pada seluruh kelas *boundary*. Atribut tambahan diperlukan untuk menyimpan *widget-widget* yang diperlukan. Sedangkan *method* tambahan dibutuhkan untuk menjaga *readability* dan *maintainability* kode
 
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## Project Status
+Status : *Completed*
+ID | Kebutuhan Fungsional  | Ya | Tidak |
+--|---|---|---|
+F01 | P/L dapat mencatat dan menampilkan *mood* pengguna | ✓ |   |
+F02 | P/L harus bisa menampilkan *positives quotes* ketika P/L diakses. | ✓ |   |
+F03 | P/L dapat mencatat dan menampilkan jurnal harian pengguna. | ✓ |   |
+F04 | P/L dapat mencatat, menyimpan, dan menunjukkan riwayat tidur pengguna. | ✓ |  |
+F05 | P/L harus bisa menyimpan data  (*mood*, jurnal, riwayat tidur, *quotes*) pengguna secara *offline*. | ✓ |  |
+F06 | P/L dapat memperlihatkan statistik data *mood* dan riwayat tidur berupa grafik sederhana. | ✓ |  |
+F07 | P/L dapat mencatat data *mood* di hari-hari sebelumnya. | ✓ |  |
+F08 | P/L harus menyediakan akses *edit* kepada pengguna. | ✓ |  |
+F09 | P/L dapat menyajikan statistik lanjut yang *insightful* bagi pengguna. | ✓ |  |
