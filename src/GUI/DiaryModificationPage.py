@@ -26,7 +26,7 @@ class DiaryModificationPage(customtkinter.CTk):
         self.diary_modif_frame = customtkinter.CTkFrame(self.master, corner_radius=0, fg_color="#568ea6")
         self.diary_modif_frame.grid_columnconfigure(1, weight=1)
         
-        diary_image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "images")
+        diary_image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "img")
         self.diary_logo_image = customtkinter.CTkImage(Image.open(os.path.join(diary_image_path, "logo.png")), size=(150,30))
         self.diary_logo_image_label = customtkinter.CTkLabel(self.diary_modif_frame, text="", image=self.diary_logo_image)
         self.diary_logo_image_label.grid(row=0, column=1, padx=(0,50), pady=(10,0), sticky="ne")

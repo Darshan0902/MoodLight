@@ -20,9 +20,9 @@ class QuotesModificationPage(CTk):
 
         # Menciptakan frame pertama tempat mengubah data quotes
         self.quotes_modif_frame = CTkFrame(self.master, corner_radius=0, fg_color="#568ea6")
-        self.quotes_image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "images")
+        self.quotes_image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "img")
         
-        self.quotes_image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "images")
+        self.quotes_image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "img")
         self.quotes_logo_image = CTkImage(Image.open(os.path.join(self.quotes_image_path, "logo.png")), size=(150,30))
         self.quotes_logo_image_label = CTkLabel(self.quotes_modif_frame, text="", image=self.quotes_logo_image)
         self.quotes_logo_image_label.grid(row=0, column=1, padx=(0,100), pady=(10,0), sticky="ne")

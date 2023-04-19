@@ -31,7 +31,7 @@ class LandingPage(CTk):
         self.grid_columnconfigure(1, weight=1)
 
         # Membuat konfigurasi gambar
-        image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "images")
+        image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "img")
         self.logo_image = CTkImage(Image.open(os.path.join(image_path, "logo.png")), size=(150,30))
         self.large_logo_image = CTkImage(Image.open(os.path.join(image_path, "logo.png")), size=(900,180))
         self.home_image = CTkImage(Image.open(os.path.join(image_path, "home.png")), size=(40,40))

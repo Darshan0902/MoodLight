@@ -42,7 +42,7 @@ class SleepTrackerPage(CTk):
     # INITIALIZER
     # Menciptakan variabel-variabel dinamis page
     def initialize_frame_attributes(self):
-        self.sleep_logo_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "images")
+        self.sleep_logo_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "img")
         self.selected_date = StringVar()
         self.start_hour = StringVar()
         self.start_minute = StringVar()

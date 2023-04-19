@@ -22,7 +22,7 @@ class MoodModificationPage(CTk):
         self.mood_controller = MoodModificationController()
         self.mood_modif_frame = CTkScrollableFrame(self.master, corner_radius=0, fg_color="#568ea6")
         self.mood_modif_frame.grid_columnconfigure(1, weight=1)
-        self.mood_image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "images")
+        self.mood_image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "img")
         self.mood_logo_image = CTkImage(Image.open(os.path.join(self.mood_image_path, "logo.png")), size=(150,30))
         self.mood_logo_image_label = CTkLabel(self.mood_modif_frame, text="", image=self.mood_logo_image)
         self.mood_logo_image_label.grid(row=0, column=1, padx=(0,50), pady=(10,0), sticky="ne")
