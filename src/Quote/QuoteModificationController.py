@@ -12,7 +12,7 @@ class QuoteModificationController :
     # CONSTRUCTOR
     # Menginisialisasi objek dengan membaca file csv yang sesuai dan menyimpan senarai objek entitas
     def __init__ (self) :
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "data/Quote.csv")
+        self.filename = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "data/Quote.csv")
         self.header = ""
         self.data = []
         
@@ -26,7 +26,7 @@ class QuoteModificationController :
             
             # Pembuatan data controller berisi daftar Quote
             for row in reader :
-                mod = QuoteModification.QuoteModification(row[0], row[1], row[2])
+                mod = QuoteModification(row[0], row[1], row[2])
                 self.data.append(mod)
             file.close()
 
@@ -60,7 +60,7 @@ class QuoteModificationController :
             return self.updateRecord(id, author, content) 
         
         # Membuat data Quote baru dan memasukkannya dalam senarai
-        newQuote = QuoteModification.QuoteModification(id, author, content)
+        newQuote = QuoteModification(id, author, content)
         self.data.append(newQuote)
         self.data.sort(key = lambda x : int(x.getID()))
         self.writeRecords()
