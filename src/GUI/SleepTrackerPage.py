@@ -67,7 +67,7 @@ class SleepTrackerPage(CTk):
         self.rating_start= CTkLabel(self.rating_frame, text="1", font=CTkFont(family="Comic Sans MS", size=30, weight="bold"), text_color="white")
         self.rating_end= CTkLabel(self.rating_frame, text="5", font=CTkFont(family="Comic Sans MS", size=30, weight="bold"), text_color="white")
         self.modif_bottom_frame = CTkFrame(self.sleep_frame, corner_radius=0, fg_color="transparent")
-        self.history_button = CTkButton(self.modif_bottom_frame, text="Edit History", font=CTkFont(size=15, weight="bold"), command=self.history_button_event, height=40,fg_color="#305f72")
+        self.history_button = CTkButton(self.modif_bottom_frame, text="Sleep History", font=CTkFont(size=15, weight="bold"), command=self.history_button_event, height=40,fg_color="#305f72")
         self.save_button = CTkButton(self.modif_bottom_frame, text="Save", font=CTkFont(size=15, weight="bold"), command=self.save_button_event, height=40, fg_color="#305f72")
 
     # Menciptakan frame kedua tempat melihat statistik sleep

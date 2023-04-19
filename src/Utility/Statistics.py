@@ -99,7 +99,7 @@ class Statistics:
             # Pemorsesan nilai
             if (len(self.data) >= 7):
                 if (count3 >= 2 and count4 >= 2):
-                    return "Mood kamu 7 hari terkahir sangat bagus! Pertahankan"
+                    return "Mood kamu 7 hari terakhir sangat bagus! Pertahankan"
                 else :
                     return "Mood kamu 7 hari terakhir kurang begitu baik :( Semangat yaa!"
             else :
