@@ -9,6 +9,7 @@ from PIL import Image
 from tkcalendar import Calendar
 from datetime import date
 from Utility.Date import Date
+from Diary.DiaryModificationController import DiaryModificationController
 
 class DiaryModificationPage(customtkinter.CTk):
 
@@ -17,6 +18,9 @@ class DiaryModificationPage(customtkinter.CTk):
     def __init__(self, master):
         # Menetapkan master dari DiaryModificationPage yaitu master
         self.master = master
+
+        # Membuat objek controller untuk memodifikasi data diary
+        self.diary_controller = DiaryModificationController()
 
         # Menciptakan frame pertama tempat mengubah data diary
         self.diary_modif_frame = customtkinter.CTkFrame(self.master, corner_radius=0, fg_color="transparent")
@@ -28,9 +32,9 @@ class DiaryModificationPage(customtkinter.CTk):
         self.diary_logo_image_label.grid(row=0, column=1, padx=(0,50), pady=(10,0), sticky="ne")
         
         self.date = date.today().strftime('%d-%m-%Y')
-        self.current_date = self.date
+        self.curr_date = self.date
 
-        self.diary_date_label = customtkinter.CTkLabel(self.diary_modif_frame, text="Date : " + self.current_date, font=customtkinter.CTkFont(size=30, weight="bold"))
+        self.diary_date_label = customtkinter.CTkLabel(self.diary_modif_frame, text="Date : " + self.curr_date, font=customtkinter.CTkFont(size=30, weight="bold"))
         self.diary_date_label.grid(row=1, column=0, padx=10, pady=10, columnspan=2)
         
         self.diary_textbox = customtkinter.CTkTextbox(self.diary_modif_frame, width=750, height=500, border_width=2)
@@ -69,10 +73,21 @@ class DiaryModificationPage(customtkinter.CTk):
         if(Date(selected_date) > Date(self.date)): # Tanggal yang dipilih tidak valid (lebih dari tanggal hari ini)
             self.error_label.configure(text="Date not valid")
         else:
-            self.current_date = selected_date
-            self.diary_date_label.configure(text="Date : " + self.current_date)
+            self.curr_date = selected_date
+            self.diary_date_label.configure(text="Date : " + self.curr_date)
+            self.diary_textbox.delete("0.0","end")
+            if (self.diary_controller.isInRecord(self.curr_date)) :
+                _, content = self.diary_controller.readRecord(self.curr_date)
+                self.diary_textbox.insert("0.0",content)
+        
             self.top_window.destroy()
 
     # Menyimpan record yang telah diubah oleh pengguna di frame ke file data
     def diary_save_button_event(self):
-        print("Save")
+        if(self.diary_controller.isInRecord(self.curr_date)) :
+            if (self.diary_textbox.get("0.0", "end").strip() != "") :
+                self.diary_controller.updateRecord(self.curr_date, self.diary_textbox.get("0.0", "end"))
+            else :
+                self.diary_controller.deleteRecord(self.curr_date)
+        elif (self.diary_textbox.get("0.0", "end").strip() != "") :
+            self.diary_controller.createRecord(self.curr_date, self.diary_textbox.get("0.0", "end"))
