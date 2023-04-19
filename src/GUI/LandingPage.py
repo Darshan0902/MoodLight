@@ -5,15 +5,18 @@
 import os
 from customtkinter import *
 from PIL import Image
+import random
 from GUI.MoodModificationPage import MoodModificationPage
 from GUI.SleepTrackerPage import SleepTrackerPage
 from GUI.DiaryModificationPage import DiaryModificationPage
 from GUI.QuotesModificationPage import QuotesModificationPage
+from Quote.QuoteModificationController import QuoteModificationController
 
 set_widget_scaling(0.85)
 
 class LandingPage(CTk):
 
+    MAX_TEXT_LENGTH = 30
     # CONSTRUCTOR
     # Menginisialisasi seluruh frame dan fungsionalitas dari LandingPage
     def __init__(self):
@@ -77,9 +80,8 @@ class LandingPage(CTk):
         self.home_frame_large_logo_label = CTkLabel(self.home_frame, text="", image=self.large_logo_image)
         self.home_frame_large_logo_label.grid(row=0, column=0, padx=450, pady=100)
 
-        self.home_textbox = CTkTextbox(self.home_frame, width=750)
-        self.home_textbox.insert("0.0", "CTkTextbox\n\n" + "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n\n" * 1)
-        self.home_textbox.grid(row=1, column=0, padx=100, pady=50)
+        self.home_quote_label = CTkLabel(self.home_frame, width=300, font=CTkFont(size=30,weight="bold"), bg_color="white", padx=30, pady=30)
+        self.home_quote_label.grid(row=1, column=0, padx=100, pady=50)
 
         # Membuat mood frame
         self.mood_frame = None
@@ -103,6 +105,7 @@ class LandingPage(CTk):
 
         # Menampilkan frame yang dipilih
         if name == "home":
+            self.show_random_quote()
             self.home_frame.grid(row=0, column=1, sticky="nsew")
         else:
             self.home_frame.grid_forget()
@@ -158,3 +161,23 @@ class LandingPage(CTk):
     # Memilih frame quotes
     def quotes_button_event(self):
         self.select_frame("quotes")
+    
+    # Memilih quotes acak
+    def show_random_quote(self) :
+        quote_controller = QuoteModificationController()
+        i = random.randint(1,len(quote_controller.data))
+        _, author, content = quote_controller.readRecord(i)
+        quoteText = str(content + " ~ " + author)
+        if (len(quoteText) > LandingPage.MAX_TEXT_LENGTH) :
+            words = quoteText.split(" ")
+            charCount = 0
+            quoteText = ""
+            for w in words :
+                if (charCount + len(w) >= LandingPage.MAX_TEXT_LENGTH) :
+                    w += "\n"
+                    charCount = 0
+                else :
+                    charCount += len(w)
+                    w += " "
+                quoteText += w
+        self.home_quote_label.configure(text=quoteText)
