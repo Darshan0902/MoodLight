@@ -24,7 +24,6 @@ class SleepTrackerPage(CTk):
 
         # Menginisialisasi keberadaan objek controller, objek statistik, dan atribut dinamis
         self.sleep_controller = SleepTrackerController()
-        self.sleep_statistics = Statistics(os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "data","Sleep.csv"),"Sleep")
         self.initialize_frame_attributes()
 
         # Menginisiasi frame page dan membuat frame modif dan stats
@@ -135,10 +134,11 @@ class SleepTrackerPage(CTk):
 
     # Mengubah data-data pada frame kedua
     def configure_stats_frame(self):
-        self.sleep_statistics.generateStatistics()
+        sleep_statistics = Statistics(os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "data","Sleep.csv"),"Sleep")
+        sleep_statistics.generateStatistics()
         graph_image = CTkImage(Image.open(os.path.join(self.sleep_logo_path, "result.png")), size=(1000, 500))
         self.graph_image_label.configure(image=graph_image)
-        self.evaluation.set(self.sleep_statistics.showInsights())
+        self.evaluation.set(sleep_statistics.showInsights())
 
     # FORGETER
     # Menghapus seluruh elemen frame pertama

@@ -72,7 +72,7 @@ class MoodModificationPage(CTk):
         self.mood_label_3 = CTkLabel(self.mood_modif_frame, text="How relaxed are you ?", font=CTkFont(family="Comic Sans MS", size=30, weight="bold"), text_color="white")
         self.mood_label_3.grid(row=4, column=0, padx=10, pady=10, columnspan=2)
 
-        self.mood_label_4 = CTkLabel(self.mood_modif_frame, text="How would you rate your mood today ?", font=CTkFont(family="Comic Sans MS", size=30, weight="bold"), text_color="white")
+        self.mood_label_4 = CTkLabel(self.mood_modif_frame, text="How energized are you ?", font=CTkFont(family="Comic Sans MS", size=30, weight="bold"), text_color="white")
         self.mood_label_4.grid(row=6, column=0, padx=10, pady=10, columnspan=2)
 
         self.mood_history = CTkButton(self.mood_modif_frame, text="Edit History", font=CTkFont(size=15, weight="bold") ,command=lambda:self.mood_history_button_event(self.mood_modif_frame), height=40, fg_color="#305f72")
