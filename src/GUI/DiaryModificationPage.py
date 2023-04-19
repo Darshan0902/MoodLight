@@ -8,6 +8,7 @@ import tkinter as tk
 from PIL import Image
 from tkcalendar import Calendar
 from datetime import date
+from Utility.Date import Date
 
 class DiaryModificationPage(customtkinter.CTk):
 
@@ -42,6 +43,8 @@ class DiaryModificationPage(customtkinter.CTk):
         self.diary_save = customtkinter.CTkButton(self.diary_modif_frame, text="Save", command=self.diary_save_button_event)
         self.diary_save.grid(row=8, column=1, padx=100, pady=10)
 
+        self.top_window = None
+
     # GETTER
     # Mengembalikan frame pertama dan utama dari DiaryModificationPage
     def get_frame(self):
@@ -50,22 +53,25 @@ class DiaryModificationPage(customtkinter.CTk):
     # EVENT ACTION
     # Membuka kalendar untuk melihat data pada hari itu
     def diary_open_calendar(self):
-        self.calendar = Calendar(self.diary_modif_frame, selectmode='day', date_pattern='dd-mm-yyyy')
-        self.calendar.grid(row=9, column=0, padx=10)
-        self.open_button = tk.Button(self.diary_modif_frame, text="Open Date", command=self.diary_open_data)
-        self.open_button.grid(row=10, column=0, padx=10, pady=10)
-        self.error_label = customtkinter.CTkLabel(self.diary_modif_frame, text="", text_color="red")
-        self.error_label.grid(row=11, column=0, padx=1, pady=10)
+        if self.top_window is None or not self.top_window.winfo_exists() :
+            self.top_window = customtkinter.CTkToplevel()
+        self.top_window.focus()
+        self.calendar = Calendar(self.top_window, selectmode='day', date_pattern='dd-mm-yyyy')
+        self.calendar.grid(row=0, column=0, padx=10)
+        self.open_button = tk.Button(self.top_window, text="Open Date", command=self.diary_open_data)
+        self.open_button.grid(row=1, column=0, padx=10, pady=10)
+        self.error_label = customtkinter.CTkLabel(self.top_window, text="", text_color="red")
+        self.error_label.grid(row=2, column=0, padx=1, pady=10)
 
     # Megubah data pada hari itu
     def diary_open_data(self):
         selected_date = self.calendar.selection_get().strftime('%d-%m-%Y')
-        # print(f"Membuka data untuk tanggal {selected_date}")
         if(Date(selected_date) > Date(self.date)): # Tanggal yang dipilih tidak valid (lebih dari tanggal hari ini)
             self.error_label.configure(text="Date not valid")
         else:
             self.current_date = selected_date
             self.diary_date_label.configure(text="Date : " + self.current_date)
+            self.top_window.destroy()
 
     # Menyimpan record yang telah diubah oleh pengguna di frame ke file data
     def diary_save_button_event(self):

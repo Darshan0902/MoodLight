@@ -70,6 +70,8 @@ class MoodModificationPage(customtkinter.CTk):
         self.mood_save = customtkinter.CTkButton(self.mood_modif_frame, text="Save", command=self.save_button_event)
         self.mood_save.grid(row=8, column=1, padx=(50,0), pady=10)
 
+        self.top_window = None
+
     # GETTER
     # Mengembalikan frame pertama dan utama dari MoodModificationPage
     def get_frame(self):
@@ -95,8 +97,8 @@ class MoodModificationPage(customtkinter.CTk):
         # Show graph
         stat = Statistics(os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "data","Mood.csv"),"Mood")
         stat.generateStatistics()
-        self.graph_image = customtkinter.CTkImage(Image.open(os.path.join(self.mood_image_path, "result.png")),Image.open(os.path.join(self.mood_image_path, "result.png")),
-                                                  (600,300))
+        self.graph_image = customtkinter.CTkImage(Image.open(os.path.join(self.mood_image_path, "result.png")),
+                                                  size=(600,300))
         self.graph_label = customtkinter.CTkLabel(self.mood_modif_frame,image=self.graph_image,text="")
         self.graph_label.grid(row=2,column=0,padx=50,pady=10,columnspan=2)
         self.evaluation = customtkinter.CTkLabel(self.mood_modif_frame,text=stat.showInsights(),font=customtkinter.CTkFont(size=15))
@@ -108,12 +110,15 @@ class MoodModificationPage(customtkinter.CTk):
 
     # Menampilkan kalendar untuk melihat data pada hari itu
     def open_calendar(self):
-        self.calendar = Calendar(self.mood_modif_frame, selectmode='day', date_pattern='dd-mm-yyyy')
-        self.calendar.grid(row=9, column=0, padx=10)
-        self.open_button = tk.Button(self.mood_modif_frame, text="Open Date", command=self.open_data)
-        self.open_button.grid(row=10, column=0, padx=10, pady=10)
-        self.error_label = customtkinter.CTkLabel(self.mood_modif_frame, text="", text_color="red")
-        self.error_label.grid(row=11, column=0, padx=10, pady=10)
+        if self.top_window is None or not self.top_window.winfo_exists() :
+            self.top_window = customtkinter.CTkToplevel()
+        self.top_window.focus()
+        self.calendar = Calendar(self.top_window, selectmode='day', date_pattern='dd-mm-yyyy')
+        self.calendar.grid(row=0, column=0, padx=10)
+        self.open_button = tk.Button(self.top_window, text="Open Date", command=self.open_data)
+        self.open_button.grid(row=1, column=0, padx=10, pady=10)
+        self.error_label = customtkinter.CTkLabel(self.top_window, text="", text_color="red")
+        self.error_label.grid(row=2, column=0, padx=10, pady=10)
 
     # Mengubah data pada hari itu
     def open_data(self):
@@ -135,9 +140,6 @@ class MoodModificationPage(customtkinter.CTk):
                 self.sliderEnergy.set(1)
             # Mengembalikan tampilan ke tampilan modifikasi data
             self.mood_return_button_event()
-            self.calendar.grid_forget()
-            self.open_button.grid_forget()
-            self.error_label.grid_forget()
 
     # Menampilkan frame sebelumnya
     def mood_return_button_event(self):
@@ -159,6 +161,8 @@ class MoodModificationPage(customtkinter.CTk):
         self.mood_return.grid_forget()
         self.graph_label.grid_forget()
         self.evaluation.grid_forget()
+        if(not self.top_window is None) :
+            self.top_window.destroy()
 
     # Menyimpan record yang telah diubah oleh pengguna di frame ke file data
     def save_button_event(self):
