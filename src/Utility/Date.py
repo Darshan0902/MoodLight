@@ -3,13 +3,8 @@
 # Menyimpan informasi tanggal
 
 class Date:
+
     # CONSTRUCTOR
-    # Konstruktor default
-    def __init__(self):
-        self.day = 0
-        self.month = 0
-        self.year = 0
-    
     # Mengubah string berisi tanggal menjadi atribut yang sesuai
     # Format : DD-MM-YYYY
     def __init__(self, dateString):
@@ -45,7 +40,7 @@ class Date:
     def __lt__(self, other):
         return (not self > other and not self == other)
     
-    # STRING TRANSFORM
+    # TRANSFORMER
     # Mengubah objek menjadi string berisi tanggal
     def toString(self):
         result = ""
