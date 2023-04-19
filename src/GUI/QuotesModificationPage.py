@@ -25,10 +25,10 @@ class QuotesModificationPage(CTk):
         self.quotes_image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "images")
         self.quotes_logo_image = CTkImage(Image.open(os.path.join(self.quotes_image_path, "logo.png")), size=(150,30))
         self.quotes_logo_image_label = CTkLabel(self.quotes_modif_frame, text="", image=self.quotes_logo_image)
-        self.quotes_logo_image_label.grid(row=0, column=0, padx=(0,100), pady=(10,0), sticky="ne")
+        self.quotes_logo_image_label.grid(row=0, column=1, padx=(0,100), pady=(10,0), sticky="ne")
 
         self.quotes_list_frame = CTkScrollableFrame(self.quotes_modif_frame,width=900,height=500,corner_radius=0,fg_color="#00b4d8")
-        self.quotes_list_frame.grid(row=1,column=0,padx=250,pady=(30,20))
+        self.quotes_list_frame.grid(row=1,column=0,padx=250,pady=(30,20), columnspan=2)
         
         self.quotes_textboxes = []
         for i in range(len(self.quotes_controller.data)) :
@@ -37,13 +37,13 @@ class QuotesModificationPage(CTk):
             self.quotes_textboxes[i].grid(row=i,column=0,padx=10,pady=10)
         
         self.format_label = CTkLabel(self.quotes_modif_frame,text="Quote format : <Quote> ~ <Author>", text_color="white", font=CTkFont(size=20,weight="bold"))
-        self.format_label.grid(row=2,column=0,padx=100,pady=5)
+        self.format_label.grid(row=2,column=0,padx=100,pady=15, columnspan=2)
 
-        self.quotes_add = CTkButton(self.quotes_modif_frame, text="Add Quotes", font=CTkFont(size=18), command=self.quotes_add_button_event, width=90, height=40, fg_color="#305f72")
-        self.quotes_add.grid(row=3, column=0, padx=100, pady=5)
+        self.quotes_add = CTkButton(self.quotes_modif_frame, text="Add Quotes", font=CTkFont(size=18, weight="bold"), command=self.quotes_add_button_event, width=130, height=40, fg_color="#305f72")
+        self.quotes_add.grid(row=3, column=0, padx=(350, 0), pady=15)
         
-        self.quotes_save = CTkButton(self.quotes_modif_frame, text="Save", font=CTkFont(size=18), command=self.quotes_save_button_event, width=90, height=40, fg_color="#305f72")
-        self.quotes_save.grid(row=4, column=0, padx=100, pady=5)
+        self.quotes_save = CTkButton(self.quotes_modif_frame, text="Save", font=CTkFont(size=18, weight="bold"), command=self.quotes_save_button_event, width=130, height=40, fg_color="#305f72")
+        self.quotes_save.grid(row=3, column=1, padx=(0,350), pady=15)
 
     # GETTER
     # Mengembalikan frame pertama dan utama dari QuotesModificationPage

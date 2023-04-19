@@ -23,7 +23,7 @@ class DiaryModificationPage(customtkinter.CTk):
         self.diary_controller = DiaryModificationController()
 
         # Menciptakan frame pertama tempat mengubah data diary
-        self.diary_modif_frame = customtkinter.CTkFrame(self.master, corner_radius=0, fg_color="transparent")
+        self.diary_modif_frame = customtkinter.CTkFrame(self.master, corner_radius=0, fg_color="#568ea6")
         self.diary_modif_frame.grid_columnconfigure(1, weight=1)
         
         diary_image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "images")
@@ -34,17 +34,20 @@ class DiaryModificationPage(customtkinter.CTk):
         self.date = date.today().strftime('%d-%m-%Y')
         self.curr_date = self.date
 
-        self.diary_date_label = customtkinter.CTkLabel(self.diary_modif_frame, text="Date : " + self.curr_date, font=customtkinter.CTkFont(size=30, weight="bold"))
-        self.diary_date_label.grid(row=1, column=0, padx=10, pady=10, columnspan=2)
+        self.diary_date_label = customtkinter.CTkLabel(self.diary_modif_frame, text="Date : " + self.curr_date, font=customtkinter.CTkFont(family="Segoe Script", size=35, weight="bold"), text_color="white")
+        self.diary_date_label.grid(row=1, column=0, padx=190, pady=(50,10), columnspan=2, sticky="w")
         
-        self.diary_textbox = customtkinter.CTkTextbox(self.diary_modif_frame, width=750, height=500, border_width=2)
-        self.diary_textbox.insert("0.0", "CTkTextbox\n\n" + "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n\n" * 20)
+        self.diary_textbox = customtkinter.CTkTextbox(self.diary_modif_frame, width=1000, height=500, border_width=2)
         self.diary_textbox.grid(row=2, column=0, padx=10, pady=10, columnspan=2)
+        self.diary_textbox.delete("0.0","end")
+        if (self.diary_controller.isInRecord(self.curr_date)) :
+            _, content = self.diary_controller.readRecord(self.curr_date)
+            self.diary_textbox.insert("0.0",content)
 
-        self.diary_entry = customtkinter.CTkButton(self.diary_modif_frame, text= "Previous Entry", command=self.diary_open_calendar)
+        self.diary_entry = customtkinter.CTkButton(self.diary_modif_frame, text= "Previous Entry", font=customtkinter.CTkFont(size=15, weight="bold"), command=self.diary_open_calendar, height=40, fg_color="#305f72")
         self.diary_entry.grid(row=8, column=0, padx=(400,0), pady=10)
         
-        self.diary_save = customtkinter.CTkButton(self.diary_modif_frame, text="Save", command=self.diary_save_button_event)
+        self.diary_save = customtkinter.CTkButton(self.diary_modif_frame, text="Save", font=customtkinter.CTkFont(size=15, weight="bold"), command=self.diary_save_button_event, height=40, fg_color="#305f72")
         self.diary_save.grid(row=8, column=1, padx=100, pady=10)
 
         self.top_window = None
@@ -59,7 +62,8 @@ class DiaryModificationPage(customtkinter.CTk):
     def diary_open_calendar(self):
         if self.top_window is None or not self.top_window.winfo_exists() :
             self.top_window = customtkinter.CTkToplevel()
-        self.top_window.focus()
+            self.top_window.title("Calendar")
+        self.top_window.grab_set()
         self.calendar = Calendar(self.top_window, selectmode='day', date_pattern='dd-mm-yyyy')
         self.calendar.grid(row=0, column=0, padx=10)
         self.open_button = tk.Button(self.top_window, text="Open Date", command=self.diary_open_data)

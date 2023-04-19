@@ -16,7 +16,7 @@ set_widget_scaling(0.85)
 
 class LandingPage(CTk):
 
-    MAX_TEXT_LENGTH = 30
+    MAX_TEXT_LENGTH = 50
     # CONSTRUCTOR
     # Menginisialisasi seluruh frame dan fungsionalitas dari LandingPage
     def __init__(self):
@@ -33,54 +33,54 @@ class LandingPage(CTk):
         # Membuat konfigurasi gambar
         image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "images")
         self.logo_image = CTkImage(Image.open(os.path.join(image_path, "logo.png")), size=(150,30))
-        self.large_logo_image = CTkImage(Image.open(os.path.join(image_path, "logo.png")), size=(450,90))
-        self.home_image = CTkImage(Image.open(os.path.join(image_path, "home.png")), size=(26,26))
-        self.mood_image = CTkImage(Image.open(os.path.join(image_path, "mood.png")), size=(26,26))
-        self.sleep_image = CTkImage(Image.open(os.path.join(image_path, "sleep.png")), size=(26,26))
-        self.diary_image = CTkImage(Image.open(os.path.join(image_path, "diary.png")), size=(26,26))
-        self.quotes_image = CTkImage(Image.open(os.path.join(image_path, "quotes.png")), size=(26,26))
+        self.large_logo_image = CTkImage(Image.open(os.path.join(image_path, "logo.png")), size=(900,180))
+        self.home_image = CTkImage(Image.open(os.path.join(image_path, "home.png")), size=(40,40))
+        self.mood_image = CTkImage(Image.open(os.path.join(image_path, "mood.png")), size=(40,40))
+        self.sleep_image = CTkImage(Image.open(os.path.join(image_path, "sleep.png")), size=(40,40))
+        self.diary_image = CTkImage(Image.open(os.path.join(image_path, "diary.png")), size=(40,40))
+        self.quotes_image = CTkImage(Image.open(os.path.join(image_path, "quotes.png")), size=(40,40))
 
         # Membuat frame navigasi 
-        self.navigation_frame = CTkFrame(self, corner_radius=0)
+        self.navigation_frame = CTkFrame(self, corner_radius=0, fg_color="#305f72")
         self.navigation_frame.grid(row=0, column=0, sticky="nsew")
         self.navigation_frame.grid_rowconfigure(6, weight=1)
 
         self.logo_image_label = CTkLabel(self.navigation_frame, text="", image=self.logo_image)
-        self.logo_image_label.grid(row=0, column=0, padx=0, pady=(20,20))
+        self.logo_image_label.grid(row=0, column=0, padx=(20,19), pady=(20,20))
 
-        self.home_button = CTkButton(self.navigation_frame, corner_radius=0, height=40, border_spacing=10, text="Home",
+        self.home_button = CTkButton(self.navigation_frame, corner_radius=0, height=40, border_spacing=10, text="Home", font=CTkFont(size=20,weight="bold"),
                                                    fg_color="transparent", text_color=("gray10", "gray90"), hover_color=("gray70", "gray30"),
                                                    image=self.home_image, anchor="w", command=self.home_button_event)
-        self.home_button.grid(row=1, column=0, sticky="ew", pady=10)
+        self.home_button.grid(row=1, column=0, sticky="ew", pady=20)
 
-        self.mood_button = CTkButton(self.navigation_frame, corner_radius=0, height=40, border_spacing=10, text="Mood",
+        self.mood_button = CTkButton(self.navigation_frame, corner_radius=0, height=40, border_spacing=10, text="Mood", font=CTkFont(size=20,weight="bold"),
                                                       fg_color="transparent", text_color=("gray10", "gray90"), hover_color=("gray70", "gray30"),
                                                       image=self.mood_image, anchor="w", command=self.mood_button_event)
-        self.mood_button.grid(row=2, column=0, sticky="ew", pady=10)
+        self.mood_button.grid(row=2, column=0, sticky="ew", pady=20)
 
-        self.sleep_button = CTkButton(self.navigation_frame, corner_radius=0, height=40, border_spacing=10, text="Sleep",
+        self.sleep_button = CTkButton(self.navigation_frame, corner_radius=0, height=40, border_spacing=10, text="Sleep", font=CTkFont(size=20,weight="bold"),
                                                       fg_color="transparent", text_color=("gray10", "gray90"), hover_color=("gray70", "gray30"),
                                                       image=self.sleep_image, anchor="w", command=self.sleep_button_event)
-        self.sleep_button.grid(row=3, column=0, sticky="ew", pady=10)
+        self.sleep_button.grid(row=3, column=0, sticky="ew", pady=20)
 
-        self.diary_button = CTkButton(self.navigation_frame, corner_radius=0, height=40, border_spacing=10, text="Diary",
+        self.diary_button = CTkButton(self.navigation_frame, corner_radius=0, height=40, border_spacing=10, text="Diary", font=CTkFont(size=20,weight="bold"),
                                                       fg_color="transparent", text_color=("gray10", "gray90"), hover_color=("gray70", "gray30"),
                                                       image=self.diary_image, anchor="w", command=self.diary_button_event)
-        self.diary_button.grid(row=4, column=0, sticky="ew", pady=10)
+        self.diary_button.grid(row=4, column=0, sticky="ew", pady=20)
 
-        self.quotes_button = CTkButton(self.navigation_frame, corner_radius=0, height=40, border_spacing=10, text="Quotes",
+        self.quotes_button = CTkButton(self.navigation_frame, corner_radius=0, height=40, border_spacing=10, text="Quotes", font=CTkFont(size=20,weight="bold"),
                                                       fg_color="transparent", text_color=("gray10", "gray90"), hover_color=("gray70", "gray30"),
                                                       image=self.quotes_image, anchor="w", command=self.quotes_button_event)
-        self.quotes_button.grid(row=5, column=0, sticky="ew", pady=10)
+        self.quotes_button.grid(row=5, column=0, sticky="ew", pady=20)
 
         # Membuat home frame
-        self.home_frame = CTkFrame(self, corner_radius=0, fg_color="transparent")
+        self.home_frame = CTkFrame(self, corner_radius=0, fg_color="#568ea6")
         self.home_frame.grid_columnconfigure(6, weight=1)
 
         self.home_frame_large_logo_label = CTkLabel(self.home_frame, text="", image=self.large_logo_image)
-        self.home_frame_large_logo_label.grid(row=0, column=0, padx=450, pady=100)
+        self.home_frame_large_logo_label.grid(row=0, column=0, padx=250, pady=(150, 60))
 
-        self.home_quote_label = CTkLabel(self.home_frame, width=300, font=CTkFont(size=30,weight="bold"), bg_color="white", padx=30, pady=30)
+        self.home_quote_label = CTkLabel(self.home_frame, width=300, font=CTkFont(size=30,weight="bold"), text_color="white", padx=30, pady=30)
         self.home_quote_label.grid(row=1, column=0, padx=100, pady=50)
 
         # Membuat mood frame
@@ -173,7 +173,10 @@ class LandingPage(CTk):
             charCount = 0
             quoteText = ""
             for w in words :
-                if (charCount + len(w) >= LandingPage.MAX_TEXT_LENGTH) :
+                if (w == "~") :
+                    w = "\n~ "
+                    charCount = 0
+                elif (charCount + len(w) >= LandingPage.MAX_TEXT_LENGTH) :
                     w += "\n"
                     charCount = 0
                 else :

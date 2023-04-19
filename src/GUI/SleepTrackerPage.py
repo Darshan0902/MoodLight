@@ -28,7 +28,7 @@ class SleepTrackerPage(CTk):
         self.initialize_frame_attributes()
 
         # Menginisiasi frame page dan membuat frame modif dan stats
-        self.sleep_frame = CTkScrollableFrame(self.master, corner_radius=0, fg_color="transparent")
+        self.sleep_frame = CTkScrollableFrame(self.master, corner_radius=0, fg_color="#568ea6")
         self.sleep_frame.grid_columnconfigure(1, weight=1)
         self.create_modif_frame_elements()
         self.create_stats_frame_elements()
@@ -55,56 +55,63 @@ class SleepTrackerPage(CTk):
     def create_modif_frame_elements(self):
         sleep_logo_image = CTkImage(Image.open(os.path.join(self.sleep_logo_path, "logo.png")), size=(150,30))
         self.sleep_logo_image_label = CTkLabel(self.sleep_frame, text="", image=sleep_logo_image)
-        self.date_label = CTkLabel(self.sleep_frame, text="Date   : ", font=CTkFont(size=30, weight="bold"))
-        self.selected_date_label = CTkLabel(self.sleep_frame, textvariable=self.selected_date, font=CTkFont(size=30, weight="bold"))
+        self.date_label = CTkLabel(self.sleep_frame, text="Date : ", font=CTkFont(family="Segoe Script", size=35, weight="bold"), text_color="white")
+        self.selected_date_label = CTkLabel(self.sleep_frame, textvariable=self.selected_date, font=CTkFont(family="Segoe Script", size=35, weight="bold"), text_color="white")
         self.time_frame = CTkFrame(self.sleep_frame, corner_radius=0, fg_color="transparent")
-        self.start_label = CTkLabel(self.time_frame, text="Sleep Time:", font=CTkFont(size=25, weight="bold"))
+        self.start_label = CTkLabel(self.time_frame, text="Sleep Time:", font=CTkFont(family = "Comic Sans MS", size=25, weight="bold"), text_color="white")
         self.start_hour_spin = Spinbox(self.time_frame, from_=0, to=23, wrap=True, textvariable=self.start_hour, width=4, justify=CENTER, font=Font(family='Helvetica', size=20))
         self.start_minute_spin = Spinbox(self.time_frame, from_=0, to=59, wrap=True, textvariable=self.start_minute, width=4, justify=CENTER, font=Font(family='Helvetica', size=20))
-        self.end_label = CTkLabel(self.time_frame, text="Wake Time:", font=CTkFont(size=25, weight="bold"))
+        self.end_label = CTkLabel(self.time_frame, text="Wake Time:", font=CTkFont(family = "Comic Sans MS", size=25, weight="bold"), text_color="white")
         self.end_hour_spin = Spinbox(self.time_frame, from_=0, to=23, wrap=True, textvariable=self.end_hour, width=4, justify=CENTER, font=Font(family='Helvetica', size=20))
         self.end_minute_spin = Spinbox(self.time_frame, from_=0, to=59, wrap=True, textvariable=self.end_minute, width=4, justify=CENTER, font=Font(family='Helvetica', size=20))
-        self.rating_label = CTkLabel(self.sleep_frame, text="How good was your sleep?", font=CTkFont(size=20, weight="bold"))
-        self.rating_slider = CTkSlider(self.sleep_frame, from_=1, to=5, number_of_steps=4, width=1000)
+        self.rating_label = CTkLabel(self.sleep_frame, text="How good was your sleep?", font=CTkFont(family="Comic Sans MS", size=30, weight="bold"), text_color="white")
+        self.rating_frame = CTkFrame(self.sleep_frame, corner_radius=0, fg_color="transparent")
+        self.rating_slider = CTkSlider(self.rating_frame, from_=1, to=5, number_of_steps=4, width=1000, progress_color="#FAE900", button_color="white", button_hover_color="grey70")
+        self.rating_start= CTkLabel(self.rating_frame, text="1", font=CTkFont(family="Comic Sans MS", size=30, weight="bold"), text_color="white")
+        self.rating_end= CTkLabel(self.rating_frame, text="5", font=CTkFont(family="Comic Sans MS", size=30, weight="bold"), text_color="white")
         self.modif_bottom_frame = CTkFrame(self.sleep_frame, corner_radius=0, fg_color="transparent")
-        self.history_button = CTkButton(self.modif_bottom_frame, text="Sleep History", command=self.history_button_event, height=40)
-        self.delete_button = CTkButton(self.modif_bottom_frame, text="Delete", command=self.delete_button_event, height=40)
-        self.save_button = CTkButton(self.modif_bottom_frame, text="Save", command=self.save_button_event, height=40)
+        self.history_button = CTkButton(self.modif_bottom_frame, text="Edit History", font=CTkFont(size=15, weight="bold"), command=self.history_button_event, height=40,fg_color="#305f72")
+        self.save_button = CTkButton(self.modif_bottom_frame, text="Save", font=CTkFont(size=15, weight="bold"), command=self.save_button_event, height=40, fg_color="#305f72")
 
     # Menciptakan frame kedua tempat melihat statistik sleep
     def create_stats_frame_elements(self):
+        self.stats_label = CTkLabel(self.sleep_frame, text="Your sleep in the past week ", font=CTkFont(family = "Comic Sans MS", size=40, weight="bold"), text_color="white")
         self.graph_image_label = CTkLabel(self.sleep_frame, text="")
-        self.evaluation_label = CTkLabel(self.sleep_frame, textvariable=self.evaluation, font=CTkFont(size=25, weight="bold"))
+        self.evaluation_label = CTkLabel(self.sleep_frame, textvariable=self.evaluation, font=CTkFont(family="Comic Sans MS", size=20), text_color="white")
         self.stats_bottom_frame = CTkFrame(self.sleep_frame, corner_radius=0, fg_color="transparent")
-        self.edit_record_button = CTkButton(self.stats_bottom_frame, text="Edit Record", command=self.edit_record_button_event, height=40)
-        self.return_button = CTkButton(self.stats_bottom_frame, text="Return", command=self.return_button_event, height=40)
+        self.edit_record_button = CTkButton(self.stats_bottom_frame, text="Edit Record", font=CTkFont(size=15, weight="bold"), command=self.edit_record_button_event, height=40, fg_color="#305f72")
+        self.return_button = CTkButton(self.stats_bottom_frame, text="Return", font=CTkFont(size=15, weight="bold"), command=self.return_button_event, height=40, fg_color="#305f72")
         self.calendar_window = None
 
     # PLACER
     # Memasang seluruh elemen frame pertama pada grid yang sesuai
     def place_modif_frame(self):
         self.sleep_logo_image_label.grid(row=0, column=1, padx=(0,50), pady=(10,0), sticky="ne")
-        self.date_label.grid(row=1, column=0, padx=(600,0), pady=(130, 30))
-        self.selected_date_label.grid(row=1, column=1, padx=(0,520), pady=(130, 30))
-        self.time_frame.grid(row=2, column=0, pady=(70,20), columnspan=2)
-        self.start_label.grid(row=0, column=0)
+        self.date_label.grid(row=1, column=0, padx=(190,0), pady=(50, 40),sticky="w")
+        self.selected_date_label.grid(row=1, column=1, padx=(0,820), pady=(50,40))
+        self.time_frame.grid(row=2, column=0, pady=(50,20), columnspan=2)
+        self.start_label.grid(row=0, column=0, padx=(20, 0))
         self.start_hour_spin.grid(row=0, column=1, padx=(50,0), pady=10)
         self.start_minute_spin.grid(row=0, column=2, padx=(50,0), pady=10)
-        self.end_label.grid(row=0, column=3, padx=(250,0))
+        self.end_label.grid(row=0, column=3, padx=(200,0))
         self.end_hour_spin.grid(row=0, column=4, padx=(50,0), pady=10)
         self.end_minute_spin.grid(row=0, column=5, padx=(50,0), pady=10)
         self.rating_label.grid(row=3, column=0, padx=110, pady=(80,0), columnspan=2)
-        self.rating_slider.grid(row=4, column=0, padx=100, pady=50, columnspan=2)
-        self.history_button.grid(row=0, column=0, padx=(0, 100))
-        self.save_button.grid(row=0, column=1, padx=100)
-        self.delete_button.grid(row=0, column=2, padx=(100,0))
-        self.modif_bottom_frame.grid(row=5, column=0, columnspan=2, pady=(30,0))
+        self.rating_frame.grid(row=4, column=0, padx=100, pady=50, columnspan=2)
+        self.rating_slider.grid(row=0, column=1)
+        self.rating_start.grid(row=0, column=0)
+        self.rating_end.grid(row=0, column=2)
+        self.history_button.grid(row=0, column=0, padx=(200, 180))
+        self.save_button.grid(row=0, column=1, padx=200)
+        self.modif_bottom_frame.grid(row=5, column=0, columnspan=2, pady=(60,0))
 
     # Memasang seluruh elemen frame kedua pada grid yang sesuai
     def place_stats_frame(self):
-        self.graph_image_label.grid(row=0, column=0, padx=200, pady=(60,40), sticky="nsew")
-        self.evaluation_label.grid(row=1, column=0)
-        self.stats_bottom_frame.grid(row=2, column=0, pady=(30,0))
+        self.sleep_logo_image_label.grid(row=0, column=1, padx=(0,50), pady=(10,0), sticky="ne")
+        self.stats_label.grid(row=1, column=0, columnspan=2, padx=10, pady=(0, 10))
+        self.graph_image_label.grid(row=2, column=0,padx=50, pady=10, sticky="nsew", columnspan=2)
+        self.evaluation_label.grid(row=3, column=0, columnspan=2, padx=50,pady=(10,0))
+        self.stats_bottom_frame.grid(row=4, column=0, pady=(30,0), columnspan=2)
         self.edit_record_button.grid(row=0, column=0, padx=(0, 100))
         self.return_button.grid(row=0, column=1, padx=(100,0))
 
@@ -123,7 +130,7 @@ class SleepTrackerPage(CTk):
             self.start_minute.set("0")
             self.end_hour.set("0")
             self.end_minute.set("0")
-            self.rating_slider.set(3)
+            self.rating_slider.set(1)
 
 
     # Mengubah data-data pada frame kedua
@@ -141,11 +148,13 @@ class SleepTrackerPage(CTk):
         self.selected_date_label.grid_forget()
         self.time_frame.grid_forget()
         self.rating_label.grid_forget()
-        self.rating_slider.grid_forget()
+        self.rating_frame.grid_forget()
         self.modif_bottom_frame.grid_forget()
     
     # Menghapus seluruh elemen frame kedua
     def forget_stats_frame(self):
+        self.sleep_logo_image_label.grid_forget()
+        self.stats_label.grid_forget()
         self.graph_image_label.grid_forget()
         self.evaluation_label.grid_forget()
         self.stats_bottom_frame.grid_forget()
@@ -202,12 +211,6 @@ class SleepTrackerPage(CTk):
         self.error_label = CTkLabel(self.calendar_window, text="", text_color="red")
         self.error_label.grid(row=2, column=0, padx=10, pady=10)
         self.calendar_window.grab_set()
-
-    # Menghapus record pada tanggal tertentu
-    def delete_button_event(self):
-        if (self.sleep_controller.isInRecord(self.selected_date.get())):
-            self.sleep_controller.deleteRecord(self.selected_date.get())
-        self.configure_modif_frame()
 
     # Memunculkan record pada tanggal tertentu
     def open_date_event(self):
