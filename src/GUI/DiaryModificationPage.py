@@ -6,7 +6,8 @@ import customtkinter
 import os
 import tkinter as tk
 from PIL import Image
-from tkcalendar import Calendar, DateEntry
+from tkcalendar import Calendar
+from datetime import date
 
 class DiaryModificationPage(customtkinter.CTk):
 
@@ -25,7 +26,10 @@ class DiaryModificationPage(customtkinter.CTk):
         self.diary_logo_image_label = customtkinter.CTkLabel(self.diary_modif_frame, text="", image=self.diary_logo_image)
         self.diary_logo_image_label.grid(row=0, column=1, padx=(0,50), pady=(10,0), sticky="ne")
         
-        self.diary_date_label = customtkinter.CTkLabel(self.diary_modif_frame, text="")
+        self.date = date.today().strftime('%d-%m-%Y')
+        self.current_date = self.date
+
+        self.diary_date_label = customtkinter.CTkLabel(self.diary_modif_frame, text="Date : " + self.current_date, font=customtkinter.CTkFont(size=30, weight="bold"))
         self.diary_date_label.grid(row=0, column=0, padx=10, pady=10, columnspan=2)
         
         self.diary_textbox = customtkinter.CTkTextbox(self.diary_modif_frame, width=750, height=500, border_width=2)
@@ -50,11 +54,18 @@ class DiaryModificationPage(customtkinter.CTk):
         self.calendar.grid(row=9, column=0, padx=10)
         self.open_button = tk.Button(self, text="Open Date", command=self.diary_open_data)
         self.open_button.grid(row=10, column=0, padx=10, pady=10)
+        self.error_label = customtkinter.CTkLabel(self, text="", text_color="red")
+        self.error_label.grid(row=11, column=0, padx=1, pady=10)
 
     # Megubah data pada hari itu
     def diary_open_data(self):
         selected_date = self.calendar.selection_get().strftime('%d-%m-%Y')
         # print(f"Membuka data untuk tanggal {selected_date}")
+        if(Date(selected_date) > Date(self.date)): # Tanggal yang dipilih tidak valid (lebih dari tanggal hari ini)
+            self.error_label.configure(text="Date not valid")
+        else:
+            self.current_date = selected_date
+            self.diary_date_label.configure(text="Date : " + self.current_date)
 
     # Menyimpan record yang telah diubah oleh pengguna di frame ke file data
     def diary_save_button_event(self):
