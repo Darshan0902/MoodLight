@@ -34,28 +34,26 @@ class SleepTrackerPage(CTk):
 
         # Konfigurasi data untuk frame pertama
         self.place_modif_frame()
-        self.today = date.today().strftime("%d-%m-%Y")
-        self.selected_date.set(self.today)  
         self.configure_modif_frame()
 
     # INITIALIZER
     # Menciptakan variabel-variabel dinamis page
     def initialize_frame_attributes(self):
         self.sleep_logo_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "img")
-        self.selected_date = StringVar()
         self.start_hour = StringVar()
         self.start_minute = StringVar()
         self.end_hour = StringVar()
         self.end_minute = StringVar()
         self.evaluation = StringVar()
+        self.today = date.today().strftime("%d-%m-%Y")
+        self.selected_date = self.today
 
     # CREATOR
     # Menciptakan frame pertama tempat mengubah record sleep
     def create_modif_frame_elements(self):
         sleep_logo_image = CTkImage(Image.open(os.path.join(self.sleep_logo_path, "logo.png")), size=(150,30))
         self.sleep_logo_image_label = CTkLabel(self.sleep_frame, text="", image=sleep_logo_image)
-        self.date_label = CTkLabel(self.sleep_frame, text="Date : ", font=CTkFont(family="Segoe Script", size=35, weight="bold"), text_color="white")
-        self.selected_date_label = CTkLabel(self.sleep_frame, textvariable=self.selected_date, font=CTkFont(family="Segoe Script", size=35, weight="bold"), text_color="white")
+        self.date_label = CTkLabel(self.sleep_frame, text="Date : " + self.selected_date, font=CTkFont(family="Segoe Script", size=35, weight="bold"), text_color="white")
         self.time_frame = CTkFrame(self.sleep_frame, corner_radius=0, fg_color="transparent")
         self.start_label = CTkLabel(self.time_frame, text="Sleep Time:", font=CTkFont(family = "Comic Sans MS", size=25, weight="bold"), text_color="white")
         self.start_hour_spin = Spinbox(self.time_frame, from_=0, to=23, wrap=True, textvariable=self.start_hour, width=4, justify=CENTER, font=Font(family='Helvetica', size=20))
@@ -87,7 +85,6 @@ class SleepTrackerPage(CTk):
     def place_modif_frame(self):
         self.sleep_logo_image_label.grid(row=0, column=1, padx=(0,50), pady=(10,0), sticky="ne")
         self.date_label.grid(row=1, column=0, padx=(190,0), pady=(50, 40),sticky="w")
-        self.selected_date_label.grid(row=1, column=1, padx=(0,820), pady=(50,40))
         self.time_frame.grid(row=2, column=0, pady=(50,20), columnspan=2)
         self.start_label.grid(row=0, column=0, padx=(20, 0))
         self.start_hour_spin.grid(row=0, column=1, padx=(50,0), pady=10)
@@ -117,8 +114,8 @@ class SleepTrackerPage(CTk):
     # CONFIGURATOR
     # Mengubah data-data pada frame pertama
     def configure_modif_frame(self):
-        if (self.sleep_controller.isInRecord(self.selected_date.get())):
-            dateString, startTime, finishTime, rating = self.sleep_controller.readRecord(self.selected_date.get()) 
+        if (self.sleep_controller.isInRecord(self.selected_date)):
+            dateString, startTime, finishTime, rating = self.sleep_controller.readRecord(self.selected_date) 
             self.start_hour.set(startTime[0:2])
             self.start_minute.set(startTime[3:])
             self.end_hour.set(finishTime[0:2])
@@ -145,7 +142,6 @@ class SleepTrackerPage(CTk):
     def forget_modif_frame(self):
         self.sleep_logo_image_label.grid_forget()
         self.date_label.grid_forget()
-        self.selected_date_label.grid_forget()
         self.time_frame.grid_forget()
         self.rating_label.grid_forget()
         self.rating_frame.grid_forget()
@@ -180,10 +176,10 @@ class SleepTrackerPage(CTk):
     def save_button_event(self):
         if (0 <= int(self.start_hour.get()) <= 23 and 0 <= int(self.start_minute.get()) <= 59 and
             0 <= int(self.end_hour.get()) <= 23 and 0 <= int(self.end_minute.get()) <= 59):
-            if (self.sleep_controller.isInRecord(self.selected_date.get())):
-                self.sleep_controller.updateRecord(self.selected_date.get(), self.get_start_time(), self.get_end_time(), int(self.rating_slider._output_value))
+            if (self.sleep_controller.isInRecord(self.selected_date)):
+                self.sleep_controller.updateRecord(self.selected_date, self.get_start_time(), self.get_end_time(), int(self.rating_slider._output_value))
             else:
-                self.sleep_controller.createRecord(self.selected_date.get(), self.get_start_time(), self.get_end_time(), int(self.rating_slider._output_value))
+                self.sleep_controller.createRecord(self.selected_date, self.get_start_time(), self.get_end_time(), int(self.rating_slider._output_value))
 
     # Mengubah frame dari frame modif ke frame stats
     def history_button_event(self):
@@ -218,5 +214,6 @@ class SleepTrackerPage(CTk):
         if (Date(chosen) > Date(self.today)):
             self.error_label.configure(text="Date not valid")
         else:
-            self.selected_date.set(chosen)
+            self.selected_date = chosen
+            self.date_label.configure(text="Date : " + self.selected_date)
             self.return_button_event()
