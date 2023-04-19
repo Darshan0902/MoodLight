@@ -18,7 +18,8 @@ class DiaryModificationController:
         
         # Melakukan pembacaan terhadap file
         with open(self.filename, "r") as file :
-            reader = csv.reader(file)
+            reader = csv.reader(file, quotechar='"', delimiter=',',
+                     quoting=csv.QUOTE_ALL, skipinitialspace=True)
             self.header = next(reader)
             
             # Pembuatan data controller berisi daftar Diary
