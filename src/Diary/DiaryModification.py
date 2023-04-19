@@ -2,9 +2,6 @@
 # Komponen ini bertugas memfasilitasi pengguna untuk melakukan pencatatan jurnal harian 
 # berdasarkan tanggal hari yang bersangkutan atau tanggal sebelumnya serta melihat data 
 # jurnal yang sudah ada melalui tampilan khusus pencatatan jurnal yang tersedia
-import sys
-sys.path.append("..")
-sys.path.append("src")
 
 from Utility.Date import Date
 

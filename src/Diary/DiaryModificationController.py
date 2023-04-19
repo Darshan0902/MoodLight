@@ -3,19 +3,16 @@
 # mengatur keberadaan dan penyimpanan dari record diary yang berupa objek entitas DiaryModification
 
 # import modul eksternal
+import os
 import csv
-import sys
-sys.path.append("..")
-sys.path.append("src")
-
 from Utility.Date import Date
-from DiaryModification import DiaryModification
+from Diary.DiaryModification import DiaryModification
 
 class DiaryModificationController:
     # CONSTRUCTOR
     # Menginisiasi objek yang membaca file file csv yang sesuai dan menyimpan senarai objek entitas
     def __init__ (self) :
-        self.filename = "././data/Diary.csv"
+        self.filename = os.path.join(os.path.dirname(os.path.realpath(__file__)), "..", "..", "data","Diary.csv")
         self.header = ""
         self.data = []
         
