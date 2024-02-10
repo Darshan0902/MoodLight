@@ -144,38 +144,183 @@ Implementer : 13521084, 13521108, 13521172
 | relax_level   | integer       | bernilai 1-5 |
 | energy_level  | integer       | bernilai 1-5 |
 
-### Tabel Data *Quote* (Quote.csv)
-| Atribut  | Tipe Data     | Keterangan   |
+# MoodLight
+> This source code is created to fulfill the Software Engineering Final Project which is to implement a GUI-based application according to the specified requirements.
+
+## Table of Contents
+- [Author](#author)
+- [Brief Description](#brief-description)
+- [File System](#file-system)
+- [Requirements](#requirements)
+- [How to Run the Program](#how-to-run-the-program)
+- [Program Screenshots](#program-screenshots)
+- [Database Tables](#database-tables)
+- [Changelog](#changelog)
+- [Project Status](#project-status)
+
+## Author
+| NIM      | Name                      |
+| -------- | --------------------------|
+| 13521062 | Go Dillon Audris          |
+| 13521084 | Austin Gabriel Pardosi    |
+| 13521108 | Michael Leon Putra Widhi  |
+| 13521168 | Satria Octavianus Nababan |
+| 13521172 | Nathan Tenka              |
+
+## Brief Description
+*MoodLight* is an application designed to track users' daily moods. This application only has one user, so it does not require registration and login features. Users of this application can record and submit their mood or feelings data every day. Additionally, users can also record daily journals and sleep history. Users can view these recorded histories from previous days, along with their daily journals and sleep histories (if any), in table format, or simple statistics or graphs as a bonus. When opening the application, users will receive random quotes. Users can also add their own desired quotes. User-added quotes can be edited or deleted by the user. This application is desktop-based, making it easier to access personally.
+
+## File System
+```bash
+.
+├─── data
+│   ├─── Diary.csv
+│   ├─── Mood.csv
+│   ├─── Quote.csv  
+│   └─── Sleep.csv
+├─── doc
+├─── img
+├─── src
+│   ├─── Diary
+│   │   ├─── DiaryModification.py
+│   │   └─── DiaryModificationController.py
+│   ├─── GUI
+│   │   ├─── DiaryModificationPage.py
+│   │   ├─── LandingPage.py
+│   │   ├─── MoodModificationPage.py
+│   │   ├─── QuotesModificationPage.py
+│   │   └─── SleepTrackerPage.py
+│   ├─── Mood
+│   │   ├─── MoodModification.py
+│   │   └─── MoodModificationController.py
+│   ├─── Quote
+│   │   ├─── QuoteModification.py
+│   │   └─── QuoteModificationController.py
+│   ├─── Sleep
+│   │   ├─── SleepTrackerController.py
+│   │   └─── SleepTrackerModification.py
+│   ├─── Utility
+│   │   ├─── Date.py
+│   │   ├─── Statistics.py
+│   │   └─── Time.py
+|   └─── App.py
+├─── .gitignore
+└─── README.md
+```
+
+## Requirements
+- matplotlib
+- csv
+- customtkinter
+- tkinter
+- pillow
+- tkcalendar
+
+## How to Run the Program
+The implemented program is a desktop application based on Python's Tkinter GUI. Here is how to run it.
+1. Clone the repository via terminal using the following command:
+   ```bash
+    $ git clone https://gitlab.informatika.org/mikeleo03/IF2250-2023-K02-02-MoodLight.git
+   ```
+2. Navigate to the `src` directory with the following command:
+   ```bash
+    $ cd src
+   ```
+3. Install the required modules by executing the command:
+   ```bash
+    $ pip install [name]
+   ```
+   Replace `[name]` with each requirement listed in [Requirements](#requirements).
+4. Run the program by executing the command:
+   ```bash
+    $ python3 App.py
+   ```
+   Make sure Python 3 latest version is installed on the execution machine (You can check the Python 3 version by running the command `python --version` in the command prompt).
+5. If successful, a desktop application interface will appear. Enjoy operating the built application.
+
+## Program Screenshots
+1. Main program interface
+![landingPage](doc/landingPage.jpg)
+*Figure 1.* Main program interface <br>
+Related Module: GUI, Quote <br>
+Implemented by: 13521062, 13521084, 13521108
+2. Mood feature interface
+![moodmodif1](doc/moodModificationPage-1.jpg)
+*Figure 2.1.* Main mood feature interface <br>
+Related Module: GUI, Mood, Utility <br>
+Implemented by: 13521062, 13521084, 13521172
+![moodmodif1](doc/moodModificationPage-2.jpg)
+*Figure 2.2.* Mood feature statistics view <br>
+Related Module: GUI, Mood, Utility <br>
+Implemented by: 13521084, 13521108, 13521172
+3. Diary feature operation
+![diarymodif](doc/diaryModificationPage.jpg)
+*Figure 3.* Main diary feature interface <br>
+Related Module: GUI, Diary <br>
+Implemented by: 13521168, 13521172
+4. Sleep Tracker feature operation
+![moodmodif1](doc/sleepTrackerPage-1.jpg)
+*Figure 4.1.* Main Sleep Tracker feature interface <br>
+Related Module: GUI, Sleep, Utility <br>
+Implemented by: 13521062
+![moodmodif1](doc/sleepTrackerPage-2.jpg)
+*Figure 4.2.* Sleep Tracker feature statistics view <br>
+Related Module: GUI, Sleep, Utility <br>
+Implemented by: 13521062, 13521108
+5. Quote feature operation
+![quotemodif](doc/quoteModificationPage.jpg)
+*Figure 5.* Main quote modification feature interface <br>
+Related Module: GUI, Quote <br>
+Implemented by: 13521084, 13521108, 13521172
+
+## Database Tables
+### Diary Data Table (Diary.csv)
+| Attribute    | Data Type     | Description |
+| ------------ | ------------- | -----------|
+| date         | date          | not null   |
+| journalEntry | varchar(256)  |            |
+
+### Mood Data Table (Mood.csv)
+| Attribute     | Data Type  | Description   |
+| ------------- | ---------- | -------------|
+| date          | date       | not null     |
+| rate          | integer    | values 1-5   |
+| relax_level   | integer    | values 1-5   |
+| energy_level  | integer    | values 1-5   |
+
+### Quote Data Table (Quote.csv)
+| Attribute  | Data Type     | Description   |
 | -------- | --------------| -------------|
 | id       | integer       | not null     |
 | author   | varchar(256)  |              |
 | content  | varchar(256)  |              |
 
-### Tabel Data *Sleep Tracker* (Sleep.csv)
-| Atribut    | Tipe Data  | Keterangan    |
+### Sleep Tracker Data Table (Sleep.csv)
+| Attribute    | Data Type  | Description    |
 | ---------- | -----------| ------------- |
-| tanggal    | date       | not null      |
-| jamMulai   | time       | format 24 jam |
-| jamSelesai | time       | format 24 jam |
-| rating     | integer    | bernilai 1-5  |
+| date       | date       | not null      |
+| startTime  | time       | 24-hour format |
+| endTime    | time       | 24-hour format |
+| rating     | integer    | values 1-5     |
 
-## Daftar Perubahan
-Berikut adalah daftar perubahan yang dirasa diperlukan setelah proses implementasi.
-- [ ] Menambahkan kelas *Time* yang berfungsi untuk melakukan perhitungan durasi untuk ditampilkan pada statistik waktu tidur
-- [ ] Menambahkan beberapa metode pada kelas-kelas *controller* yang berfungsi untuk memudahkan komunikasi objek lain dengan *controller*
-- [ ] Tidak mengimplementasikan kelas InputDeterminer karena tidak diperlukan dalam implementasi aplikasi
-- [ ] Menambahkan atribut-atribut tambahan serta metode tambahan pada seluruh kelas *boundary*. Atribut tambahan diperlukan untuk menyimpan *widget-widget* yang diperlukan. Sedangkan *method* tambahan dibutuhkan untuk menjaga *readability* dan *maintainability* kode
+## Changelog
+Here is a list of changes deemed necessary after the implementation process:
+- [ ] Adding a *Time* class that functions to calculate the duration to be displayed in sleep time statistics.
+- [ ] Adding several methods in the *controller* classes that serve to facilitate communication with other objects.
+- [ ] Not implementing the InputDeterminer class because it is not needed in the application implementation.
+- [ ] Adding additional attributes and methods in all boundary classes. Additional attributes are needed to store necessary widgets. Meanwhile, additional methods are needed to maintain code readability and maintainability.
 
 ## Project Status
-Status : *Completed*
-ID | Kebutuhan Fungsional  | Ya | Tidak |
+Status: *Completed*
+ID | Functional Requirement  | Yes | No |
 --|---|---|---|
-F01 | P/L dapat mencatat dan menampilkan *mood* pengguna | ✓ |   |
-F02 | P/L harus bisa menampilkan *positives quotes* ketika P/L diakses. | ✓ |   |
-F03 | P/L dapat mencatat dan menampilkan jurnal harian pengguna. | ✓ |   |
-F04 | P/L dapat mencatat, menyimpan, dan menunjukkan riwayat tidur pengguna. | ✓ |  |
-F05 | P/L harus bisa menyimpan data  (*mood*, jurnal, riwayat tidur, *quotes*) pengguna secara *offline*. | ✓ |  |
-F06 | P/L dapat memperlihatkan statistik data *mood* dan riwayat tidur berupa grafik sederhana. | ✓ |  |
-F07 | P/L dapat mencatat data *mood* di hari-hari sebelumnya. | ✓ |  |
-F08 | P/L harus menyediakan akses *edit* kepada pengguna. | ✓ |  |
-F09 | P/L dapat menyajikan statistik lanjut yang *insightful* bagi pengguna. | ✓ |  |
+F01 | Users can record and display their mood | ✓ |   |
+F02 | The application displays positive quotes when accessed | ✓ |   |
+F03 | Users can record and display daily journals | ✓ |   |
+F04 | Users can record, store, and display their sleep history | ✓ |  |
+F05 | Users can store user data (mood, journal, sleep history, quotes) offline | ✓ |  |
+F06 | The application can display mood and sleep history statistics in simple graphs | ✓ |  |
+F07 | Users can record mood data from previous days | ✓ |  |
+F08 | The application provides edit access to users | ✓ |  |
+F09 | The application can present advanced statistics that are insightful to users | ✓ |  |      |
+
